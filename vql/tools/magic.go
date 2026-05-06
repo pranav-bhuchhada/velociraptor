@@ -12,6 +12,7 @@ import (
 	"github.com/Velocidex/ordereddict"
 	"www.velocidex.com/golang/velociraptor/accessors"
 	"www.velocidex.com/golang/velociraptor/acls"
+	"www.velocidex.com/golang/velociraptor/utils"
 	"www.velocidex.com/golang/velociraptor/vql"
 	vql_subsystem "www.velocidex.com/golang/velociraptor/vql"
 	"www.velocidex.com/golang/vfilter"
@@ -37,6 +38,7 @@ func (self MagicFunction) Call(
 	args *ordereddict.Dict) vfilter.Any {
 
 	defer vql_subsystem.RegisterMonitor(ctx, "magic", args)()
+	defer utils.RecoverVQL(scope)
 
 	arg := &MagicFunctionArgs{}
 	err := arg_parser.ExtractArgsWithContext(ctx, scope, args, arg)
@@ -103,9 +105,11 @@ func (self MagicFunction) Call(
 		return vfilter.Null{}
 	}
 
-	// Just let libmagic handle the path
-	if arg.Accessor == "" {
-		magic, err := handle.File(arg.Path.String())
+	// Just let libmagic handle the path if it can
+	filename, err := accessors.GetUnderlyingAPIFilename(arg.Accessor,
+		scope, arg.Path)
+	if err == nil {
+		magic, err := handle.File(filename)
 		if err != nil {
 			scope.Log("magic: %v", err)
 			return vfilter.Null{}

@@ -226,14 +226,15 @@ func (self *HuntDispatcher) checkForExpiry(
 		// Check if the hunt is expired and adjust its state if so
 		now := uint64(utils.GetTime().Now().UnixNano() / 1000)
 
+		var mutations []*api_proto.HuntMutation
+
+		// Collect mutations as quickly as possible to minimize locks.
 		_ = self.ApplyFuncOnHunts(ctx, services.OnlyRunningHunts,
 			func(hunt_obj *api_proto.Hunt) error {
 				if hunt_obj.State == api_proto.Hunt_RUNNING &&
 					now > hunt_obj.Expires {
 
-					// Even if we fail to stop one hunt, keep going to
-					// try to stop the others.
-					_ = self.MutateHunt(ctx, config_obj,
+					mutations = append(mutations,
 						&api_proto.HuntMutation{
 							HuntId: hunt_obj.HuntId,
 							State:  api_proto.Hunt_STOPPED,
@@ -242,6 +243,12 @@ func (self *HuntDispatcher) checkForExpiry(
 				}
 				return nil
 			})
+
+		for _, m := range mutations {
+			// Even if we fail to stop one hunt, keep going to
+			// try to stop the others.
+			_ = self.MutateHunt(ctx, config_obj, m)
+		}
 	}
 }
 
@@ -397,33 +404,44 @@ func (self *HuntDispatcher) StartRefresh(
 	wg *sync.WaitGroup,
 	config_obj *config_proto.Config) error {
 
+	// On the client we register a dummy dispatcher since
+	// there is nothing to sync from.
+	if config_obj.Datastore == nil {
+		return nil
+	}
+
+	// Initialize the storage manager from the index if possible. Done
+	// inline to avoid races with startup.
+	logger := logging.GetLogger(config_obj, &logging.FrontendComponent)
+	n, err := self.Store.LoadHuntsFromIndex(ctx, config_obj)
+	if err != nil && self.I_am_master {
+		logger.Info("<green>Hunt dispatchers</> Missing initial hunt index - will rebuild.")
+	}
+	self.Debug("StartRefresh: LoadHuntsFromIndex %v (%v)", n, err)
+
 	// flush the hunts periodically
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
 
-		// On the client we register a dummy dispatcher since
-		// there is nothing to sync from.
-		if config_obj.Datastore == nil {
-			return
+		// This could take a long time for startup but we dont have a
+		// choice.
+		if err != nil || n == 0 {
+			stats, err := self.Store.LoadHuntsFromDatastore(ctx, config_obj, FORCE_REFRESH)
+			if err != nil {
+				return
+			}
+			self.Debug("StartRefresh: LoadHuntsFromDatastore %#v (%v)",
+				stats, err)
+
+			// Flush the index immediately
+			self.Store.FlushIndex(ctx)
 		}
 
 		refresh := HuntDispatcherRefresh(config_obj)
 
-		logger := logging.GetLogger(config_obj, &logging.FrontendComponent)
 		logger.Info("<green>Starting</> Hunt Dispatcher Service for %v.",
 			services.GetOrgName(config_obj))
-
-		if refresh < 0 {
-			return
-		}
-
-		// Start the first refresh in the background as it could take
-		// a long time.
-		err := self.Store.Refresh(ctx, config_obj, FORCE_REFRESH)
-		if err != nil {
-			logger.Error("Unable to sync hunts: %v", err)
-		}
 
 		for {
 			select {

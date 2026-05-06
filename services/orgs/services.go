@@ -402,12 +402,6 @@ func (self *OrgManager) startRootOrgServices(
 		return err
 	}
 
-	err = datastore.StartDatastore(
-		ctx, wg, org_config)
-	if err != nil {
-		return err
-	}
-
 	if spec.SchedulerService {
 		err := scheduler.StartSchedulerService(ctx, wg, org_config)
 		if err != nil {

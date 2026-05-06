@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/Velocidex/ordereddict"
-	"gopkg.in/yaml.v2"
+	"github.com/Velocidex/yaml/v2"
 	"www.velocidex.com/golang/velociraptor/actions"
 	actions_proto "www.velocidex.com/golang/velociraptor/actions/proto"
 	api_proto "www.velocidex.com/golang/velociraptor/api/proto"
@@ -620,6 +620,6 @@ func (self *logWriter) Write(b []byte) (int, error) {
 	level, msg := logging.SplitIntoLevelAndLog(b)
 	now := int(Clock.Now().Unix())
 	return self.log_file.WriteJSONL([]byte(json.Format(
-		"{\"_ts\":%d,\"client_time\":%d,\"level\":%q,\"message\":%q}\n",
+		`{"_ts":%d,"client_time":%d,"level":%q,"message":%q}`,
 		now, now, level, msg)))
 }

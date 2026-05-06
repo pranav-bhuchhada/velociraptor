@@ -22,7 +22,6 @@ import (
 	"www.velocidex.com/golang/velociraptor/datastore"
 	"www.velocidex.com/golang/velociraptor/file_store"
 	"www.velocidex.com/golang/velociraptor/grpc_client"
-	"www.velocidex.com/golang/velociraptor/json"
 	"www.velocidex.com/golang/velociraptor/logging"
 	"www.velocidex.com/golang/velociraptor/paths/artifacts"
 	"www.velocidex.com/golang/velociraptor/services"
@@ -177,40 +176,6 @@ type MasterFrontendManager struct {
 
 	mu    sync.Mutex
 	stats map[string]*FrontendMetrics
-
-	messages []*api_proto.GlobalUserMessage
-}
-
-func (self *MasterFrontendManager) SetGlobalMessage(
-	message *api_proto.GlobalUserMessage) {
-	self.mu.Lock()
-	defer self.mu.Unlock()
-
-	found := false
-	for idx, item := range self.messages {
-		if item.Key == message.Key {
-			self.messages[idx] = message
-			found = true
-		}
-	}
-
-	if !found {
-		self.messages = append(self.messages, message)
-	}
-}
-
-func (self *MasterFrontendManager) GetGlobalMessages() []*api_proto.GlobalUserMessage {
-	self.mu.Lock()
-	defer self.mu.Unlock()
-
-	res := []*api_proto.GlobalUserMessage{}
-	for _, item := range self.messages {
-		if item.Level != "" {
-			res = append(res, item)
-		}
-	}
-
-	return res
 }
 
 func (self *MasterFrontendManager) processMetrics(ctx context.Context,
@@ -222,13 +187,8 @@ func (self *MasterFrontendManager) processMetrics(ctx context.Context,
 		return nil
 	}
 
-	serialized, err := json.Marshal(row_metric)
-	if err != nil {
-		return err
-	}
-
 	metric := &FrontendMetrics{}
-	err = json.Unmarshal(serialized, metric)
+	err := utils.ParseIntoStruct(row_metric, metric)
 	if err != nil {
 		return err
 	}
@@ -401,14 +361,6 @@ func NewMinionFrontendManager(
 	config_obj *config_proto.Config,
 	name string) *MinionFrontendManager {
 	return &MinionFrontendManager{config_obj: config_obj, name: name}
-}
-
-func (self MinionFrontendManager) SetGlobalMessage(
-	message *api_proto.GlobalUserMessage) {
-}
-
-func (self MinionFrontendManager) GetGlobalMessages() []*api_proto.GlobalUserMessage {
-	return nil
 }
 
 func (self MinionFrontendManager) GetMinionCount() int {

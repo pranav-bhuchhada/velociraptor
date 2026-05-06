@@ -135,9 +135,8 @@ func syncFlowTables(
 			stats.TotalFinishedClients++
 		}
 
-		rs_writer.WriteJSONL([]byte(
-			json.Format(`{"ClientId": %q, "Hostname": %q, "FlowId": %q, "StartedTime": %q, "State": %q, "Duration": %q, "TotalBytes": %q, "TotalRows": %q}
-`,
+		err = rs_writer.WriteJSONL([]byte(
+			json.Format(`{"ClientId": %q, "Hostname": %q, "FlowId": %q, "StartedTime": %q, "State": %q, "Duration": %q, "TotalBytes": %q, "TotalRows": %q}`,
 				participation_row.ClientId,
 				services.GetHostname(ctx, config_obj, participation_row.ClientId),
 				participation_row.FlowId,
@@ -146,6 +145,9 @@ func syncFlowTables(
 				flow.Context.ExecutionDuration/1000000000,
 				flow.Context.TotalUploadedBytes,
 				flow.Context.TotalCollectedRows)), 1)
+		if err != nil {
+			return nil, err
+		}
 	}
 	return stats, nil
 }
@@ -173,7 +175,6 @@ func (self *HuntDispatcher) GetFlows(
 	if options.SortColumn != "" || options.FilterColumn != "" {
 		_, err := syncFlowTables(ctx, config_obj, launcher, hunt_id,
 			NewHuntRefreshStats("GetFlows"), nil, !FORCE_REFRESH)
-		//		_, err := self.RebuildHuntIndex(ctx, hunt_id, !FORCE_REFRESH)
 		if err != nil && !errors.Is(err, utils.CancelledError) {
 			close(output_chan)
 			return output_chan, 0, err

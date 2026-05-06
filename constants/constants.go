@@ -23,7 +23,7 @@ import (
 )
 
 const (
-	VERSION = "0.76.2"
+	VERSION = "0.76.5"
 
 	// This is the version of dependent client binaries that will be
 	// included in the offline collector or MSI. Usually this will be
@@ -102,10 +102,13 @@ const (
 	HASH_MAX_SIZE   = "HASH_MAX_SIZE"
 	BUFFER_MAX_SIZE = "BUFFER_MAX_SIZE"
 
-	RAW_REG_CACHE_SIZE  = "RAW_REG_CACHE_SIZE"
-	RAW_REG_CACHE_TIME  = "RAW_REG_CACHE_TIME"
-	BINARY_CACHE_SIZE   = "BINARY_CACHE_SIZE"
+	RAW_REG_CACHE_SIZE = "RAW_REG_CACHE_SIZE"
+	RAW_REG_CACHE_TIME = "RAW_REG_CACHE_TIME"
+	BINARY_CACHE_SIZE  = "BINARY_CACHE_SIZE"
+
 	EVTX_FREQUENCY      = "EVTX_FREQUENCY"
+	EVTX_PREFERRED_LANG = "EVTX_PREFERRED_LANG"
+
 	USN_FREQUENCY       = "USN_FREQUENCY"
 	ZIP_FILE_CACHE_SIZE = "ZIP_FILE_CACHE_SIZE"
 
@@ -201,6 +204,7 @@ const (
 	HTTP_SECRETS    = "HTTP Secrets"
 	SPLUNK_CREDS    = "Splunk Creds"
 	ELASTIC_CREDS   = "Elastic Creds"
+	ADX_CREDS       = "ADX Creds"
 	SMTP_CREDS      = "SMTP Creds"
 	EXECVE_SECRET   = "Execve Secrets"
 
@@ -208,11 +212,6 @@ const (
 	TIMELINE_ANNOTATION      = "Annotation"
 	TIMELINE_DEFAULT_KEY     = "Timestamp"
 	TIMELINE_DEFAULT_MESSAGE = "Message"
-
-	// Environment variables
-	VELOCIRAPTOR_CONFIG         = "VELOCIRAPTOR_CONFIG"
-	VELOCIRAPTOR_LITERAL_CONFIG = "VELOCIRAPTOR_LITERAL_CONFIG"
-	VELOCIRAPTOR_API_CONFIG     = "VELOCIRAPTOR_API_CONFIG"
 
 	VELOCIRAPTOR_SERVER_CLIENT_ID = "server"
 )
