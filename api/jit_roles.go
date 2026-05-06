@@ -238,9 +238,15 @@ func jitListHandler(config_obj *config_proto.Config) http.Handler {
 				return
 			}
 
-			// Only permanent admins can see all requests
+			// Permanent server_admin or jit_approver can see all requests
 			is_admin, _ := services.CheckPermanentAccess(
 				org_config_obj, user_record.Name, acls.SERVER_ADMIN)
+			if !is_admin {
+				policy, p_err := services.GetPolicy(org_config_obj, user_record.Name)
+				if p_err == nil {
+					is_admin = utils.InString(policy.Roles, "jit_approver")
+				}
+			}
 
 			status_str := r.URL.Query().Get("status")
 			username := r.URL.Query().Get("username")

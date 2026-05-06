@@ -12,7 +12,7 @@ import (
 var (
 	ALL_ROLES = []string{"org_admin", "administrator", "reader",
 		"analyst", "investigator",
-		"artifact_writer", "api"}
+		"artifact_writer", "api", "jit_approver"}
 
 	ALL_PERMISSIONS = []string{
 		"ANY_QUERY",
@@ -249,6 +249,11 @@ func GetRolePermissions(
 			// administrator, it allows root on endpoints!
 		case "artifact_writer":
 			result.ArtifactWriter = true
+
+			// JIT approvers can approve/deny/revoke JIT role
+			// requests without needing full server_admin.
+		case "jit_approver":
+			result.ReadResults = true
 
 		default:
 			return errors.New("Unknown role")

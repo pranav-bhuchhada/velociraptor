@@ -27,8 +27,9 @@ const (
 	maxRequestAge       = 7 * 24 * 60 * 60 // 7 days, for garbage collection
 )
 
-// Roles that cannot be requested via JIT due to their dangerous permissions.
-var blockedJITRoles = []string{"reader", "api", "org_admin"}
+// Roles that cannot be requested via JIT due to their dangerous permissions
+// or because they are administrative/low-value roles.
+var blockedJITRoles = []string{"reader", "api", "org_admin", "jit_approver"}
 
 type JITManager struct {
 	mu         sync.Mutex
@@ -164,6 +165,22 @@ func generateRequestID(requester string) string {
 		requester, time.Now().Unix(), hex.EncodeToString(nonce))
 }
 
+// canApproveJIT checks if a user has permanent authority to
+// approve/deny/revoke JIT requests (server_admin or jit_approver role).
+func canApproveJIT(config_obj *config_proto.Config, principal string) bool {
+	ok, _ := services.CheckPermanentAccess(
+		config_obj, principal, acls.SERVER_ADMIN)
+	if ok {
+		return true
+	}
+
+	policy, err := services.GetPolicy(config_obj, principal)
+	if err != nil {
+		return false
+	}
+	return utils.InString(policy.Roles, "jit_approver")
+}
+
 func (self *JITManager) countPendingForUser(username string) int {
 	count := 0
 	lower := utils.ToLower(username)
@@ -249,11 +266,9 @@ func (self *JITManager) ApproveOrDeny(
 	approver string,
 	approval *api_proto.JITApprovalRequest) (*api_proto.JITRoleRequest, error) {
 
-	ok, err := services.CheckPermanentAccess(
-		config_obj, approver, acls.SERVER_ADMIN)
-	if err != nil || !ok {
+	if !canApproveJIT(config_obj, approver) {
 		return nil, fmt.Errorf(
-			"only permanent server_admin can approve/deny JIT requests (temporary JIT-granted admins cannot)")
+			"only permanent server_admin or jit_approver can approve/deny JIT requests")
 	}
 
 	self.mu.Lock()
@@ -304,11 +319,9 @@ func (self *JITManager) RevokeGrant(
 	principal string,
 	request_id string) error {
 
-	ok, err := services.CheckPermanentAccess(
-		config_obj, principal, acls.SERVER_ADMIN)
-	if err != nil || !ok {
+	if !canApproveJIT(config_obj, principal) {
 		return fmt.Errorf(
-			"only permanent server_admin can revoke JIT grants (temporary JIT-granted admins cannot)")
+			"only permanent server_admin or jit_approver can revoke JIT grants")
 	}
 
 	self.mu.Lock()

@@ -189,10 +189,16 @@ func (self *ACLManager) GetEffectivePolicy(
 		}
 	}
 
+	// Preserve the role names before expansion clears them
+	roles := append([]string{}, policy.Roles...)
+
 	err = acls.GetRolePermissions(config_obj, policy.Roles, policy)
 	if err != nil {
 		return nil, err
 	}
+
+	// Restore role names so callers can inspect them
+	policy.Roles = roles
 
 	// Reserved for the server itself - can not be set by normal means.
 	policy.SuperUser = false
