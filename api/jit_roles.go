@@ -5,31 +5,34 @@ import (
 	"io"
 	"net/http"
 
+	errors "github.com/go-errors/errors"
+
 	"www.velocidex.com/golang/velociraptor/acls"
 	"www.velocidex.com/golang/velociraptor/api/authenticators"
 	api_proto "www.velocidex.com/golang/velociraptor/api/proto"
 	api_utils "www.velocidex.com/golang/velociraptor/api/utils"
+	config_proto "www.velocidex.com/golang/velociraptor/config/proto"
 	"www.velocidex.com/golang/velociraptor/services"
 	"www.velocidex.com/golang/velociraptor/utils"
 )
 
 const maxJITBodySize = 65536 // 64KB
 
-func readJITBody(w http.ResponseWriter, r *http.Request) ([]byte, bool) {
+func readJITBody(config_obj *config_proto.Config, w http.ResponseWriter, r *http.Request) ([]byte, bool) {
 	r.Body = http.MaxBytesReader(w, r.Body, maxJITBodySize)
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
-		returnError(w, 400, "Request body too large or unreadable")
+		returnError(config_obj, w, 400, errors.New("Request body too large or unreadable"))
 		return nil, false
 	}
 	return body, true
 }
 
-func jitRequestRoleHandler() http.Handler {
+func jitRequestRoleHandler(config_obj *config_proto.Config) http.Handler {
 	return api_utils.HandlerFunc(nil,
 		func(w http.ResponseWriter, r *http.Request) {
 			if r.Method != "POST" {
-				returnError(w, 405, "Method not allowed")
+				returnError(config_obj, w, 405, errors.New("Method not allowed"))
 				return
 			}
 
@@ -38,30 +41,30 @@ func jitRequestRoleHandler() http.Handler {
 
 			org_manager, err := services.GetOrgManager()
 			if err != nil {
-				returnError(w, 500, err.Error())
+				returnError(config_obj, w, 500, err)
 				return
 			}
 
 			org_config_obj, err := org_manager.GetOrgConfig(org_id)
 			if err != nil {
-				returnError(w, 404, err.Error())
+				returnError(config_obj, w, 404, err)
 				return
 			}
 
 			user_record := GetUserInfo(r.Context(), org_config_obj)
 			if user_record.Name == "" {
-				returnError(w, 403, "Unauthenticated")
+				returnError(config_obj, w, 403, errors.New("Unauthenticated"))
 				return
 			}
 
-			body, ok := readJITBody(w, r)
+			body, ok := readJITBody(config_obj, w, r)
 			if !ok {
 				return
 			}
 
 			request := &api_proto.JITRequestRoleRequest{}
 			if err := json.Unmarshal(body, request); err != nil {
-				returnError(w, 400, "Invalid request body")
+				returnError(config_obj, w, 400, errors.New("Invalid request body"))
 				return
 			}
 
@@ -71,14 +74,14 @@ func jitRequestRoleHandler() http.Handler {
 
 			jit_manager, err := services.GetJITManager(org_config_obj)
 			if err != nil {
-				returnError(w, 500, "JIT service not available")
+				returnError(config_obj, w, 500, errors.New("JIT service not available"))
 				return
 			}
 
 			result, err := jit_manager.RequestRole(
 				org_config_obj, user_record.Name, request)
 			if err != nil {
-				returnError(w, 400, err.Error())
+				returnError(config_obj, w, 400, err)
 				return
 			}
 
@@ -87,11 +90,11 @@ func jitRequestRoleHandler() http.Handler {
 		})
 }
 
-func jitApproveHandler() http.Handler {
+func jitApproveHandler(config_obj *config_proto.Config) http.Handler {
 	return api_utils.HandlerFunc(nil,
 		func(w http.ResponseWriter, r *http.Request) {
 			if r.Method != "POST" {
-				returnError(w, 405, "Method not allowed")
+				returnError(config_obj, w, 405, errors.New("Method not allowed"))
 				return
 			}
 
@@ -100,43 +103,43 @@ func jitApproveHandler() http.Handler {
 
 			org_manager, err := services.GetOrgManager()
 			if err != nil {
-				returnError(w, 500, err.Error())
+				returnError(config_obj, w, 500, err)
 				return
 			}
 
 			org_config_obj, err := org_manager.GetOrgConfig(org_id)
 			if err != nil {
-				returnError(w, 404, err.Error())
+				returnError(config_obj, w, 404, err)
 				return
 			}
 
 			user_record := GetUserInfo(r.Context(), org_config_obj)
 			if user_record.Name == "" {
-				returnError(w, 403, "Unauthenticated")
+				returnError(config_obj, w, 403, errors.New("Unauthenticated"))
 				return
 			}
 
-			body, ok := readJITBody(w, r)
+			body, ok := readJITBody(config_obj, w, r)
 			if !ok {
 				return
 			}
 
 			approval := &api_proto.JITApprovalRequest{}
 			if err := json.Unmarshal(body, approval); err != nil {
-				returnError(w, 400, "Invalid request body")
+				returnError(config_obj, w, 400, errors.New("Invalid request body"))
 				return
 			}
 
 			jit_manager, err := services.GetJITManager(org_config_obj)
 			if err != nil {
-				returnError(w, 500, "JIT service not available")
+				returnError(config_obj, w, 500, errors.New("JIT service not available"))
 				return
 			}
 
 			result, err := jit_manager.ApproveOrDeny(
 				org_config_obj, user_record.Name, approval)
 			if err != nil {
-				returnError(w, 400, err.Error())
+				returnError(config_obj, w, 400, err)
 				return
 			}
 
@@ -145,11 +148,11 @@ func jitApproveHandler() http.Handler {
 		})
 }
 
-func jitRevokeHandler() http.Handler {
+func jitRevokeHandler(config_obj *config_proto.Config) http.Handler {
 	return api_utils.HandlerFunc(nil,
 		func(w http.ResponseWriter, r *http.Request) {
 			if r.Method != "POST" {
-				returnError(w, 405, "Method not allowed")
+				returnError(config_obj, w, 405, errors.New("Method not allowed"))
 				return
 			}
 
@@ -158,23 +161,23 @@ func jitRevokeHandler() http.Handler {
 
 			org_manager, err := services.GetOrgManager()
 			if err != nil {
-				returnError(w, 500, err.Error())
+				returnError(config_obj, w, 500, err)
 				return
 			}
 
 			org_config_obj, err := org_manager.GetOrgConfig(org_id)
 			if err != nil {
-				returnError(w, 404, err.Error())
+				returnError(config_obj, w, 404, err)
 				return
 			}
 
 			user_record := GetUserInfo(r.Context(), org_config_obj)
 			if user_record.Name == "" {
-				returnError(w, 403, "Unauthenticated")
+				returnError(config_obj, w, 403, errors.New("Unauthenticated"))
 				return
 			}
 
-			body, ok := readJITBody(w, r)
+			body, ok := readJITBody(config_obj, w, r)
 			if !ok {
 				return
 			}
@@ -183,20 +186,20 @@ func jitRevokeHandler() http.Handler {
 				RequestId string `json:"request_id"`
 			}
 			if err := json.Unmarshal(body, &req); err != nil {
-				returnError(w, 400, "Invalid request body")
+				returnError(config_obj, w, 400, errors.New("Invalid request body"))
 				return
 			}
 
 			jit_manager, err := services.GetJITManager(org_config_obj)
 			if err != nil {
-				returnError(w, 500, "JIT service not available")
+				returnError(config_obj, w, 500, errors.New("JIT service not available"))
 				return
 			}
 
 			err = jit_manager.RevokeGrant(
 				org_config_obj, user_record.Name, req.RequestId)
 			if err != nil {
-				returnError(w, 400, err.Error())
+				returnError(config_obj, w, 400, err)
 				return
 			}
 
@@ -205,7 +208,7 @@ func jitRevokeHandler() http.Handler {
 		})
 }
 
-func jitListHandler() http.Handler {
+func jitListHandler(config_obj *config_proto.Config) http.Handler {
 	return api_utils.HandlerFunc(nil,
 		func(w http.ResponseWriter, r *http.Request) {
 			org_id := authenticators.GetOrgIdFromRequest(r)
@@ -213,25 +216,25 @@ func jitListHandler() http.Handler {
 
 			org_manager, err := services.GetOrgManager()
 			if err != nil {
-				returnError(w, 500, err.Error())
+				returnError(config_obj, w, 500, err)
 				return
 			}
 
 			org_config_obj, err := org_manager.GetOrgConfig(org_id)
 			if err != nil {
-				returnError(w, 404, err.Error())
+				returnError(config_obj, w, 404, err)
 				return
 			}
 
 			user_record := GetUserInfo(r.Context(), org_config_obj)
 			if user_record.Name == "" {
-				returnError(w, 403, "Unauthenticated")
+				returnError(config_obj, w, 403, errors.New("Unauthenticated"))
 				return
 			}
 
 			jit_manager, err := services.GetJITManager(org_config_obj)
 			if err != nil {
-				returnError(w, 500, "JIT service not available")
+				returnError(config_obj, w, 500, errors.New("JIT service not available"))
 				return
 			}
 
@@ -264,7 +267,7 @@ func jitListHandler() http.Handler {
 			result, err := jit_manager.ListRequests(
 				org_config_obj, status, username)
 			if err != nil {
-				returnError(w, 500, err.Error())
+				returnError(config_obj, w, 500, err)
 				return
 			}
 
@@ -273,7 +276,7 @@ func jitListHandler() http.Handler {
 		})
 }
 
-func jitMyGrantsHandler() http.Handler {
+func jitMyGrantsHandler(config_obj *config_proto.Config) http.Handler {
 	return api_utils.HandlerFunc(nil,
 		func(w http.ResponseWriter, r *http.Request) {
 			org_id := authenticators.GetOrgIdFromRequest(r)
@@ -281,32 +284,32 @@ func jitMyGrantsHandler() http.Handler {
 
 			org_manager, err := services.GetOrgManager()
 			if err != nil {
-				returnError(w, 500, err.Error())
+				returnError(config_obj, w, 500, err)
 				return
 			}
 
 			org_config_obj, err := org_manager.GetOrgConfig(org_id)
 			if err != nil {
-				returnError(w, 404, err.Error())
+				returnError(config_obj, w, 404, err)
 				return
 			}
 
 			user_record := GetUserInfo(r.Context(), org_config_obj)
 			if user_record.Name == "" {
-				returnError(w, 403, "Unauthenticated")
+				returnError(config_obj, w, 403, errors.New("Unauthenticated"))
 				return
 			}
 
 			jit_manager, err := services.GetJITManager(org_config_obj)
 			if err != nil {
-				returnError(w, 500, "JIT service not available")
+				returnError(config_obj, w, 500, errors.New("JIT service not available"))
 				return
 			}
 
 			grants, err := jit_manager.GetActiveGrants(
 				org_config_obj, user_record.Name)
 			if err != nil {
-				returnError(w, 500, err.Error())
+				returnError(config_obj, w, 500, err)
 				return
 			}
 
