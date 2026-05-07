@@ -159,7 +159,7 @@ func (self *ACLManager) GetPolicy(
 }
 
 // GetEffectivePolicy expands any roles in the policy object to
-// produce a simple object.
+// produce a simple object, including any active JIT grants.
 func (self *ACLManager) GetEffectivePolicy(
 	config_obj *config_proto.Config,
 	principal string) (*acl_proto.ApiClientACL, error) {
@@ -174,10 +174,31 @@ func (self *ACLManager) GetEffectivePolicy(
 		return nil, err
 	}
 
+	// Merge active JIT grants into the policy's roles
+	jit_manager, jit_err := services.GetJITManager(config_obj)
+	if jit_err == nil {
+		grants, err := jit_manager.GetActiveGrants(config_obj, principal)
+		if err == nil {
+			for _, grant := range grants {
+				for _, role := range grant.Roles {
+					if !utils.InString(policy.Roles, role) {
+						policy.Roles = append(policy.Roles, role)
+					}
+				}
+			}
+		}
+	}
+
+	// Preserve the role names before expansion clears them
+	roles := append([]string{}, policy.Roles...)
+
 	err = acls.GetRolePermissions(config_obj, policy.Roles, policy)
 	if err != nil {
 		return nil, err
 	}
+
+	// Restore role names so callers can inspect them
+	policy.Roles = roles
 
 	// Reserved for the server itself - can not be set by normal means.
 	policy.SuperUser = false

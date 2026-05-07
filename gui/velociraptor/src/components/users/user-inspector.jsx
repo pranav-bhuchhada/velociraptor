@@ -25,6 +25,7 @@ import EditUserDialog from './edit-user.jsx';
 import api from '../core/api-service.jsx';
 import {CancelToken} from 'axios';
 import ToolTip from '../widgets/tooltip.jsx';
+import { JITApprovalManager } from './jit-manager.jsx';
 
 const POLL_TIME = 5000;
 
@@ -778,30 +779,43 @@ class UserInspector extends Component {
     }
 
     render() {
+        let perms = this.context.traits && this.context.traits.Permissions;
+        let is_admin = perms && (perms.org_admin || perms.server_admin);
+
         return (
             <div className="users-search-panel">
               <div className="padded">
-                <Nav activeKey={this.state.tab} variant="tab"
+                <Nav activeKey={is_admin ? this.state.tab : "jit"}
+                     variant="tab"
                      onSelect={this.setDefaultTab}>
-                  <Nav.Item>
-                    <Nav.Link as="button" className="btn btn-default"
-                              eventKey="users">{T("Users")}</Nav.Link>
-                  </Nav.Item>
+                  {is_admin &&
+                    <Nav.Item>
+                      <Nav.Link as="button" className="btn btn-default"
+                                eventKey="users">{T("Users")}</Nav.Link>
+                    </Nav.Item>}
+
+                  {is_admin &&
+                    <Nav.Item>
+                      <Nav.Link as="button" className="btn btn-default"
+                                eventKey="orgs">{T("Orgs")}</Nav.Link>
+                    </Nav.Item>}
 
                   <Nav.Item>
                     <Nav.Link as="button" className="btn btn-default"
-                              eventKey="orgs">{T("Orgs")}</Nav.Link>
+                              eventKey="jit">{T("JIT Requests")}</Nav.Link>
                   </Nav.Item>
                 </Nav>
                 <div className="card-deck">
-                  { this.state.tab === "users" &&
+                  { this.state.tab === "users" && is_admin &&
                     <UsersOverview
                       updateUsers={this.loadUsers}
                       users={this.state.users} />}
-                  { this.state.tab === "orgs" &&
+                  { this.state.tab === "orgs" && is_admin &&
                     <OrgsOverview
                       updateUsers={this.loadUsers}
                       users={this.state.users} /> }
+                  { (this.state.tab === "jit" || !is_admin) &&
+                    <JITApprovalManager /> }
                 </div>
               </div>
             </div>

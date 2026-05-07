@@ -132,11 +132,12 @@ class VeloNavigator extends Component {
         }
 
         // Only show the user management screen if the user is an
-        // admin in this org.
-        let user_is_admin = this.context.traits &&
-            this.context.traits.Permissions && (
-                this.context.traits.Permissions.org_admin ||
-                    this.context.traits.Permissions.server_admin);
+        // admin in this org or a JIT approver.
+        let perms = this.context.traits && this.context.traits.Permissions;
+        let user_is_admin = perms && (
+            perms.org_admin || perms.server_admin);
+        let user_is_jit_approver = perms && perms.roles &&
+            perms.roles.indexOf("jit_approver") >= 0;
         let customization = this.context.traits && this.context.traits.customizations;
         customization = customization || {};
 
@@ -245,7 +246,8 @@ class VeloNavigator extends Component {
                         </NavLink>
                       </li>
 
-                      {user_is_admin && !customization.disable_user_management && (
+                      {(user_is_admin || user_is_jit_approver) &&
+                       !customization.disable_user_management && (
                         <li className="nav-link">
                           <NavLink to="/users">
                             <span>
@@ -253,7 +255,7 @@ class VeloNavigator extends Component {
                                 <FontAwesomeIcon icon="user" />
                               </i>
                             </span>
-                            {T("Users")}
+                            {user_is_admin ? T("Users") : T("JIT Requests")}
                           </NavLink>
                         </li>
                       )}
