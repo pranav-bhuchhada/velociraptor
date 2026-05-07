@@ -66,7 +66,7 @@ class _UserSettings extends React.Component {
                         traits: traits,
                         messages: response.data.messages || []});
 
-                    // Only upate the theme if it changed.
+                    // Only update the theme if it changed.
                     if (current_theme !== traits.theme) {
                         document.body.classList.remove('no-theme');
                         document.body.classList.remove('veloci-dark');

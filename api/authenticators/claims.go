@@ -324,7 +324,7 @@ func (self *OidcClaimsGetter) SetRolesForUser(
 			return err
 		}
 
-		// Some other error occured - reject.
+		// Some other error occurred - reject.
 	} else if err != nil {
 		return err
 	}

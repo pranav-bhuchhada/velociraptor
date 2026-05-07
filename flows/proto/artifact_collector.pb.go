@@ -599,7 +599,7 @@ func (x *ArtifactUploadedFileInfo) GetType() string {
 }
 
 // Maintain this also outside the collector context. It will be
-// updated each time anyting about the collection is changed, without
+// updated each time anything about the collection is changed, without
 // having to race updating the main record. The read active_time is
 // the latest between this record and the one in
 // ArtifactCollectorContext. This is mainly used by the GUI to notice

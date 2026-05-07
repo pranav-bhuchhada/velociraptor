@@ -1,6 +1,6 @@
 name: Generic.Client.LocalLogsRetrieve
 description: |
-  Retrives the locally written logs.
+  Retrieves the locally written logs.
 
 type: CLIENT
 

@@ -200,7 +200,7 @@ func (self *MergeSorterCtx) Merge(ctx context.Context, output_chan chan types.Ro
 		}
 
 		// Consume the value from the provider with the
-		// smallers value.
+		// smallest value.
 		self.merge_files[smallest_idx].Consume()
 
 		// otherwise push the value on

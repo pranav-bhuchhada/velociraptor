@@ -85,7 +85,7 @@ func SetNodeName(name string) {
 }
 
 // Turn off logging to files from now on. This is needed for commands
-// that manipulate the config file and we dont want to attempt to
+// that manipulate the config file and we don't want to attempt to
 // write to random log files.
 func DisableLogging() {
 	mu.Lock()

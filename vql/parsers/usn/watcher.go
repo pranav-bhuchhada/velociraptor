@@ -171,7 +171,7 @@ func (self *USNWatcherService) StartMonitoring(
 			self.mu.Lock()
 			handlers, pres := self.registrations[key]
 
-			// No more registrations, we dont care any more.
+			// No more registrations, we don't care any more.
 			if !pres || len(handlers) == 0 {
 				delete(self.registrations, key)
 				self.mu.Unlock()

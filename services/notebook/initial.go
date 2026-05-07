@@ -31,7 +31,7 @@ There are several types of notebooks:
 To make it simpler to understand the different contexts where
 notebooks are created, we always create the initial notebook from a
 NOTEBOOK type artifact. When the notebook is created from other
-artifacts, the code below creates a psuedo NOTEBOOK artifact based on
+artifacts, the code below creates a pseudo NOTEBOOK artifact based on
 the other artifacts and adds it to a private repository.
 
 Notebooks are created by the GUI, when the GUI sends a
@@ -61,7 +61,7 @@ the GUI in future.
    and EndTime, client notebooks contain ClientId etc).
 
    The GUI may return the parameters to the server, in which case the
-   server creates the psuedo notebook artifact from this field.
+   server creates the pseudo notebook artifact from this field.
 
 */
 
@@ -163,7 +163,7 @@ func (self *NotebookManager) CreateInitialNotebook(ctx context.Context,
 	return final_err
 }
 
-// Builds the psuedo notebook artifact based on the notebook request.
+// Builds the pseudo notebook artifact based on the notebook request.
 func CalculateNotebookArtifact(
 	ctx context.Context,
 	config_obj *config_proto.Config,
@@ -200,12 +200,12 @@ func CalculateNotebookArtifact(
 		out.Artifacts = append(out.Artifacts, "Notebooks.Default")
 	}
 
-	// This is a psuedo artifact used to build the notebook.
+	// This is a pseudo artifact used to build the notebook.
 	res = &artifacts_proto.Artifact{
 		Name: "PrivateNotebook",
 	}
 
-	// Check if the psuedo artifact is already cached.
+	// Check if the pseudo artifact is already cached.
 	db, err := datastore.GetDB(config_obj)
 	if err != nil {
 		return nil, nil, err
@@ -230,7 +230,7 @@ func CalculateNotebookArtifact(
 		}
 	}()
 
-	// Now build the psuedo artifact.
+	// Now build the pseudo artifact.
 	seen := make(map[string]bool)
 	seen_tools := make(map[string]bool)
 
@@ -245,7 +245,7 @@ func CalculateNotebookArtifact(
 		res.Export += artifact.Export
 
 		// Resolve any imports - expand their export directly into the
-		// psuedo artifact's export section because it will be
+		// pseudo artifact's export section because it will be
 		// compiled in a private repository, so wont be able to see
 		// the imported artifact definitions.
 		for _, imp := range artifact.Imports {
@@ -511,7 +511,7 @@ LIMIT 1000
 			}}})
 	}
 
-	// Keep the psuedo artifact's parameters list in the notebook metadata.
+	// Keep the pseudo artifact's parameters list in the notebook metadata.
 	out.Parameters = res.Parameters
 
 	return res, out, nil
@@ -586,7 +586,7 @@ func populateDefaultSpecs(
 	return nil
 }
 
-// Given the psuedo notebook artifact and the pre-populated request,
+// Given the pseudo notebook artifact and the pre-populated request,
 // calculate the specs required to launch the notebook artifact.
 func CalculateSpecs(
 	ctx context.Context,
@@ -602,7 +602,7 @@ func CalculateSpecs(
 		}
 	}
 
-	// The caller can set a Specs set OR set seperate env
+	// The caller can set a Specs set OR set separate env
 	seen := make(map[string]string)
 	for _, s := range in.Specs {
 		if s.Parameters != nil {
@@ -635,7 +635,7 @@ func CalculateSpecs(
 	return res, nil
 }
 
-// Compile the psuedo artifact into a set of requests that can be used
+// Compile the pseudo artifact into a set of requests that can be used
 // to recreate VQL state. These requests are added to the notebook
 // metadata.
 func updateNotebookRequests(
@@ -743,7 +743,7 @@ func getInitialCellsFromArtifacts(
 					Env:    env,
 
 					// Need to wait for all cells to calculate or
-					// we will overload the netowork workers if
+					// we will overload the network workers if
 					// there are too many.
 					Sync: true,
 				})

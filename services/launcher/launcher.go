@@ -1,7 +1,7 @@
 /*
   Launches new collection against clients.
 
-  Artifacts are YAML files which encapsultate VQL queries in human
+  Artifacts are YAML files which encapsulate VQL queries in human
   readable contextual package. The launcher service is responsible for
   compiling artifacts into direct client requests. Clients run direct
   VQL statements derived from the artifacts, while users write,
@@ -401,7 +401,7 @@ func expandArtifacts(artifact *artifacts_proto.Artifact) []*artifacts_proto.Arti
 			new_artifact := proto.Clone(artifact).(*artifacts_proto.Artifact)
 			new_artifact.Sources = []*artifacts_proto.ArtifactSource{source}
 			// A precondition at the source level will
-			// override an artifact wide preconditon.
+			// override an artifact wide precondition.
 			if source.Precondition != "" {
 				new_artifact.Precondition = source.Precondition
 			}
@@ -821,7 +821,7 @@ func NewLauncherService(
 	wg *sync.WaitGroup,
 	config_obj *config_proto.Config) (services.Launcher, error) {
 
-	// The laucher service is also created on the client to ensure it
+	// The launcher service is also created on the client to ensure it
 	// can compile artifacts etc. But it does not make sense to
 	// actually store any of the flows on the client. We therefore
 	// install a dummy storer which just returns errors for any

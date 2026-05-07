@@ -177,7 +177,7 @@ func (self *GuiTemplateEngine) Import(artifact, name string) interface{} {
 	for _, report := range definition.Reports {
 		if report.Name == name {
 			// We parse the template for new definitions,
-			// we dont actually care about the output.
+			// we don't actually care about the output.
 			_, err := self.tmpl.Parse(SanitizeGoTemplates(report.Template))
 			if err != nil {
 				self.Error("Template Erorr: %v", err)

@@ -182,7 +182,7 @@ func (self *ArtifactRepositoryPlugin) Call(
 			return
 		}
 
-		// Wait here untill all the sources are done.
+		// Wait here until all the sources are done.
 		wg := &sync.WaitGroup{}
 		defer wg.Wait()
 
@@ -302,7 +302,7 @@ func (self *ArtifactRepositoryPlugin) copyScope(
 	vfilter.Scope, error) {
 	env := ordereddict.NewDict()
 
-	// TODO: Move most of these to the scope context as they dont
+	// TODO: Move most of these to the scope context as they don't
 	// change with subscopes so it should be faster to get them from
 	// the context.
 	for _, field := range []string{

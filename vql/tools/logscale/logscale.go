@@ -596,7 +596,7 @@ func (self *LogScaleQueue) processEvents(ctx context.Context, scope vfilter.Scop
 		postEvents := false
 
 		// We don't watch the context because we need to clear the queue first.
-		// The context cancelation will close the listener, which will close
+		// The context cancellation will close the listener, which will close
 		// the output channel once the queue is flushed.
 		select {
 		case <-clock.After(self.batchingTimeoutDuration):

@@ -16,7 +16,7 @@ import (
 	"www.velocidex.com/golang/vfilter/types"
 )
 
-// A pipe is a VQL constract that emulates a file from a query.
+// A pipe is a VQL construct that emulates a file from a query.
 //
 // For example:
 // LET MyPipe = Pipe(query={

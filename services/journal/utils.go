@@ -109,7 +109,7 @@ func WatchQueueWithCB(ctx context.Context,
 // System.Flow.Completion. In recent Velociraptor version, the event
 // is sent by the minion without reading the full object from
 // disk. This allows faster processing on the server but it means we
-// dont have the full object available.
+// don't have the full object available.
 func GetFlowFromQueue(
 	ctx context.Context,
 	config_obj *config_proto.Config,

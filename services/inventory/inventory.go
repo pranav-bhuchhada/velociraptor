@@ -534,7 +534,7 @@ func (self *InventoryService) AddTool(
 	tool := proto.Clone(tool_request).(*artifacts_proto.Tool)
 	tool.FilestorePath = paths.ObfuscateName(config_obj, tool.Name)
 
-	// No client config so we dont know any server urls - therefore we
+	// No client config so we don't know any server urls - therefore we
 	// can not serve locally at all.
 	if tool.ServeLocally && config_obj.Client == nil {
 		tool.ServeLocally = false
@@ -549,7 +549,7 @@ func (self *InventoryService) AddTool(
 			tool.ServeUrl = tool.ServeUrls[0]
 		}
 	} else {
-		// If we dont serve the tool, the clients will directly get
+		// If we don't serve the tool, the clients will directly get
 		// the tool from its upstream URL.
 		tool.ServeUrl = tool.Url
 		tool.ServeUrls = []string{tool.ServeUrl}

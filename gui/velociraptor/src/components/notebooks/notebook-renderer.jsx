@@ -81,7 +81,7 @@ export default class NotebookRenderer extends React.Component {
         let notebook = Object.assign({}, this.props.notebook);
         let cell_metadata = [...notebook.cell_metadata];
 
-        // Dont allow us to remove all cells.
+        // Don't allow us to remove all cells.
         if (cell_metadata.length <= 1) {
             return;
         }

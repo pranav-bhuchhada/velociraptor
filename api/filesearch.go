@@ -147,7 +147,7 @@ func (self *ApiServer) SearchFile(ctx context.Context,
 			offset -= int64(n)
 
 			// Offset went backwards before the start of the file - we
-			// didnt find it.
+			// didn't find it.
 			if offset < 0 {
 				return &api_proto.SearchFileResponse{}, nil
 			}

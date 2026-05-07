@@ -47,7 +47,7 @@ func (self *AccessorWindowsTestSuite) TestACL() {
 	// Permission denied!
 	assert.Error(self.T(), err)
 
-	// Try again with more premissions.
+	// Try again with more permissions.
 	scope = vql_subsystem.MakeScope().AppendVars(ordereddict.NewDict().
 		Set(vql_subsystem.ACL_MANAGER_VAR, acl_managers.NullACLManager{}))
 	scope.SetLogger(log.New(os.Stderr, " ", 0))

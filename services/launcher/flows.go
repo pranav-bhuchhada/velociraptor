@@ -30,7 +30,7 @@ import (
 	"www.velocidex.com/golang/velociraptor/utils"
 )
 
-// Filter will be applied on flows to remove those we dont care about.
+// Filter will be applied on flows to remove those we don't care about.
 func (self *Launcher) GetFlows(
 	ctx context.Context,
 	config_obj *config_proto.Config,
@@ -226,10 +226,10 @@ func (self *Launcher) CancelFlow(
 }
 
 // The collection_context contains high level stats that summarise the
-// colletion. We derive this information from the specific results of
+// collection. We derive this information from the specific results of
 // each query.
 func UpdateFlowStats(collection_context *flows_proto.ArtifactCollectorContext) {
-	// Support older colletions which do not have this info
+	// Support older collections which do not have this info
 	if len(collection_context.QueryStats) == 0 &&
 		collection_context.InflightTime == 0 {
 		return

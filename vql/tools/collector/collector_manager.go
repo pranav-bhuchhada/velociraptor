@@ -54,7 +54,7 @@ type collectionManager struct {
 	collection_context *flows.CollectionContext
 	logger             *logWriter
 
-	// The VQL requests we actuall collected. We store those in the
+	// The VQL requests we actually collected. We store those in the
 	// container for provenance.
 	requests api_proto.ApiFlowRequestDetails
 

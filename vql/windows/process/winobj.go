@@ -152,7 +152,7 @@ func GetObjects(ctx context.Context,
 	}
 }
 
-// Encrich the WinObjDesc with additional information
+// Enrich the WinObjDesc with additional information
 func descObject(scope vfilter.Scope, info *WinObjDesc) {
 	switch info.Type {
 	case "SymbolicLink":

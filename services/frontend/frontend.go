@@ -262,7 +262,7 @@ func (self *MasterFrontendManager) prepareOrgStats() (
 	return result, nil
 }
 
-// Every 10 seconds read the cummulative stats and update the
+// Every 10 seconds read the cumulative stats and update the
 // Server.Monitor.Health artifact.
 func (self *MasterFrontendManager) UpdateStats(ctx context.Context) {
 	for {

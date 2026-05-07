@@ -52,7 +52,7 @@ const (
 	API_User
 
 	// Used by the Velociraptor Server to make minion to master API
-	// calls. Implicitely trusted.
+	// calls. Implicitly trusted.
 	SuperUser
 )
 
@@ -104,7 +104,7 @@ func NewGRPCPool(config_obj *config_proto.Config,
 	case SuperUser:
 		if config_obj.Frontend != nil && config_obj.Client != nil {
 			// Present the frontend certificate as our identity. This
-			// will be implicitely trusted for every ACL.
+			// will be implicitly trusted for every ACL.
 			certificate = config_obj.Frontend.Certificate
 			private_key = config_obj.Frontend.PrivateKey
 			ca_certificate = config_obj.Client.CaCertificate

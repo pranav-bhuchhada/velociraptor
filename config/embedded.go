@@ -25,7 +25,7 @@ func ExtractEmbeddedConfig(
 	// configuration. This solution only loads the first 100mb into
 	// memory which should be sufficient for most practical config
 	// files. If there are embedded binaries they will not be read and
-	// will be ignored at this stage (thay can be extracted with the
+	// will be ignored at this stage (they can be extracted with the
 	// 'me' accessor).
 	buf, err := utils.ReadAllWithLimit(fd, 100*1024*1024)
 

@@ -81,7 +81,7 @@ func TestClientKeyLRU(t *testing.T) {
 		assert.Equal(t, cipher.encrypted_cipher, outbound2)
 	}
 
-	// Make sure we dont leak
+	// Make sure we don't leak
 	assert.Equal(t, 1, len(lru.by_source))
 	assert.Equal(t, 1, len(lru.by_inbound_cipher))
 	assert.Equal(t, int64(1), lru.size)

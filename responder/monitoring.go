@@ -195,7 +195,7 @@ func (self *MonitoringContext) NextUploadId() int64 {
 func (self *MonitoringContext) sendAlertMessage(
 	ctx context.Context, level string,
 
-	// msg containes serialized services.AlertMessage
+	// msg contains serialized services.AlertMessage
 	msg string) {
 
 	self.mu.Lock()
@@ -339,7 +339,7 @@ func (self *MonitoringResponder) AddResponse(message *crypto_proto.VeloMessage) 
 	}
 }
 
-// Monitoring queries dont have a status - the logs will be of type error.
+// Monitoring queries don't have a status - the logs will be of type error.
 func (self *MonitoringResponder) RaiseError(ctx context.Context, message string) {
 	logger := logging.GetLogger(self.config_obj, &logging.ClientComponent)
 	logger.Error("MonitoringResponder: %v", message)

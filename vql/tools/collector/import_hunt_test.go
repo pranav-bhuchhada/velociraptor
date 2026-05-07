@@ -188,7 +188,7 @@ func (self *TestSuite) TestCreateAndImportHunt() {
 	assert.IsType(self.T(), &api_proto.Hunt{}, imported_hunt)
 
 	// Wait here until the hunt is updated - this happens
-	// asyncronously by the hunt dispatcher.
+	// asynchronously by the hunt dispatcher.
 	vtesting.WaitUntil(time.Second, self.T(), func() bool {
 		snapshot, _ := self.snapshotHuntFlow().Get("/hunts/H.1234.json")
 		return len(json.AnyToString(snapshot, json.DefaultEncOpts())) > 10

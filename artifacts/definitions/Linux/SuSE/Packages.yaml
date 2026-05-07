@@ -1,7 +1,7 @@
 name: Linux.SuSE.Packages
 author: Hilko Bengen <bengen@hilluzination.de>
 description: |
-  Parse list of installed packages from zypper output
+  Parse list of installed packages from `zypper` output
 
 implied_permissions:
   - EXECVE

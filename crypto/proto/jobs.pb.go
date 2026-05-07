@@ -483,7 +483,7 @@ type FlowRequest struct {
 	// sending progress updates on the running flows. This is useful
 	// to monitor how the client is progress but if it done too often
 	// increases load on the server. Default is 5000 (5sec) and you
-	// can updatet the default in
+	// can update the default in
 	// Client.default_server_flow_stats_update
 	FlowUpdateTime uint64 `protobuf:"varint,3,opt,name=flow_update_time,json=flowUpdateTime,proto3" json:"flow_update_time,omitempty"`
 	// A limit on total number of rows returned from the
@@ -651,7 +651,7 @@ type VeloMessage struct {
 	// Instructs the client to resume transactions
 	ResumeTransactions *ResumeTransactions `protobuf:"bytes,45,opt,name=ResumeTransactions,proto3" json:"ResumeTransactions,omitempty"`
 	// Check up on in progress flows. Causes the client to return a set
-	// of FlowStats for inflight flows.
+	// of FlowStats for in-flight flows.
 	FlowStatsRequest *FlowStatsRequest     `protobuf:"bytes,43,opt,name=flow_stats_request,json=flowStatsRequest,proto3" json:"flow_stats_request,omitempty"`
 	Cancel           *Cancel               `protobuf:"bytes,32,opt,name=Cancel,proto3" json:"Cancel,omitempty"`
 	UpdateForeman    *proto.ForemanCheckin `protobuf:"bytes,35,opt,name=UpdateForeman,proto3" json:"UpdateForeman,omitempty"`
@@ -1247,7 +1247,7 @@ func (x *FlowStatsSummaryItem) GetFlowId() string {
 // This is a status response that is sent for each complete
 // query. Velociraptor collections consist of multiple queries (for
 // example collecting multiple artifacts or artifacts with multiple
-// sources). Each query request ellicits a status message when
+// sources). Each query request elicits a status message when
 // finished to indicate the query's success status and send stats
 // about it.
 type VeloStatus struct {

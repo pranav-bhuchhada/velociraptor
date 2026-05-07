@@ -75,7 +75,7 @@ func (self *AnalysisState) AnalyseArtifactRequiredPermissions(
 		"COLLECT_SERVER",
 	}
 
-	// They also receive permissins required by the artifact because
+	// They also receive permissions required by the artifact because
 	// this will be enforced on the server.
 	implied_permissions = append(implied_permissions,
 		artifact.RequiredPermissions...)
@@ -376,7 +376,7 @@ func (self *ApiDescription) VerifyCallSite(
 	}
 
 	// If the callsite contains a . we have no idea what it
-	// means. Assume this is not an error. It may be a startlark
+	// means. Assume this is not an error. It may be a starlark
 	// module for example.
 	if strings.Contains(callsite.Name, ".") {
 		return nil
@@ -539,7 +539,7 @@ func VerifyArtifact(
 	state.AnalyseArtifactRequiredPermissions(artifact)
 }
 
-// Gather the different supporession in different areas of the
+// Gather the different suppressions in different areas of the
 // artifact. NOTE: Suppressions declared in any section of the
 // artifact apply to the entire artifact.
 func gatherSuppressions(

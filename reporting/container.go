@@ -234,7 +234,7 @@ func (self *Container) StoreArtifact(
 
 	artifact_name := query.Name
 
-	// Dont store un-named queries but run them anyway.
+	// Don't store un-named queries but run them anyway.
 	if artifact_name == "" {
 		query_log := actions.QueryLog.AddQuery(query.VQL)
 		defer query_log.Close()

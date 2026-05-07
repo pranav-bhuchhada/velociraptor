@@ -141,7 +141,7 @@ func (self *TestSuite) TestPagedReader() {
 	// Close the scope - this should close all the pool
 	self.scope.Close()
 
-	// Destoying the scope should close the readers.
+	// Destroying the scope should close the readers.
 	vtesting.WaitUntil(time.Second, self.T(), func() bool {
 		reader.mu.Lock()
 		defer reader.mu.Unlock()

@@ -386,7 +386,7 @@ func NewFlowStorageManager(
 		throttler:     utils.NewThrottlerWithDuration(time.Second),
 
 		// Do not allow more than one reindex at the same time. If we
-		// cant get to reindex quickly, we just dont worry about it
+		// cant get to reindex quickly, we just don't worry about it
 		// and use the old index snapshot.
 		concurrencyControl: utils.NewConcurrencyControl(
 			1, 100*time.Millisecond),

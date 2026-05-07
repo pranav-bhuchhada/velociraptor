@@ -162,7 +162,7 @@ func (self *ClientInfoTestSuite) TestInFlightMessages() {
 
 	assert.Equal(self.T(), len(tasks), 1)
 
-	// Should contains a status check request for all inflight flows.
+	// Should contains a status check request for all in-flight flows.
 	golden.Set("StatusChecks", tasks)
 
 	// Now complete the flows
@@ -198,7 +198,7 @@ func (self *ClientInfoTestSuite) TestInFlightMessages() {
 	tasks, err = client_info_manager.GetClientTasks(self.Ctx, self.client_id)
 	assert.NoError(self.T(), err)
 
-	// Should conatin
+	// Should contain
 	assert.Equal(self.T(), len(tasks), 4)
 
 	client_info, err = client_info_manager.Get(self.Ctx, self.client_id)

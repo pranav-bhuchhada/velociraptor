@@ -79,7 +79,7 @@ type Enroller struct {
 // TODO: This is a hold over from GRR - do we need it?  GRR's
 // enrollments are very slow and launching flows very expensive so it
 // makes sense to delay this. Velociraptor's enrollments are very
-// cheap so perhaps we dont need to worry about it here?
+// cheap so perhaps we don't need to worry about it here?
 func (self *Enroller) MaybeEnrol() {
 	next_enrollment := self.last_enrollment_time.Add(1 * time.Minute)
 	now := self.clock.Now()
@@ -447,7 +447,7 @@ func (self *HTTPConnector) Post(
 		// This error means something went wrong in processing the
 		// message we sent - we do not want to retry sending this
 		// message because the server already attempted to process it
-		// but it didnt work for some reason.
+		// but it didn't work for some reason.
 	case 400:
 		data := &bytes.Buffer{}
 		_, err := utils.Copy(ctx, data, resp.Body)
@@ -717,7 +717,7 @@ type NotificationReader struct {
 	// Send the server Server.Internal.ClientInfo messages
 	// periodically. This is sent outside the executor queues to avoid
 	// having the message accumulate in the ring buffer file, but it
-	// looks just like a regular montoring event query result.
+	// looks just like a regular monitoring event query result.
 	mu                 sync.Mutex
 	last_update_time   time.Time
 	last_update_period time.Duration
@@ -1115,7 +1115,7 @@ func NewHTTPCommunicator(
 	}
 
 	// Shuffle the list of URLs so that if a server goes down,
-	// clients will be distributed better accross
+	// clients will be distributed better across
 	// the remaining servers.
 	rand.Seed(utils.Now().UnixNano())
 	rand.Shuffle(len(urls), func(i, j int) {
@@ -1177,7 +1177,7 @@ func NewHTTPCommunicator(
 	// the client/server connection is interrupted the client will
 	// attempt to reconnect immediately but will then back off to
 	// ensure it does not go into a reconnect loop. Since receiver
-	// connects happen all the time we are at risk of a reeive loop -
+	// connects happen all the time we are at risk of a receive loop -
 	// where the client reconnects very frequently. This limiter
 	// avoids this condition by rate limiting the frequency of reader
 	// connections.

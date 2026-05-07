@@ -327,7 +327,7 @@ func validateClientConfig(
 	// The current server config.
 	config_obj *config_proto.Config,
 
-	// A client config passed by the caller or "" for derving it from
+	// A client config passed by the caller or "" for deriving it from
 	// the server config.
 	config_yaml string) (stripped_config *config_proto.Config, err error) {
 

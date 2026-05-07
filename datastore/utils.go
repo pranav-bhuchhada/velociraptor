@@ -45,7 +45,7 @@ func NewMultiGetSubjectRequest(message proto.Message, path api.DSPathSpec, data 
 	}
 }
 
-// A helper function to read multipe subjects at the same time.
+// A helper function to read multiple subjects at the same time.
 func MultiGetSubject(
 	config_obj *config_proto.Config,
 	requests []*MultiGetSubjectRequest) error {

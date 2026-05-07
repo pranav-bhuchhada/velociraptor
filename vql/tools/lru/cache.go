@@ -37,7 +37,7 @@ func NewLRU(ctx context.Context, scope vfilter.Scope, opts Options) (LRUCache, e
 
 type _CacheFunctionArgs struct {
 	Func     types.LazyExpr  `vfilter:"optional,field=func,doc=A function to evaluate (deprecated - use a lambda instead)"`
-	Lambda   *vfilter.Lambda `vfilter:"optional,field=lambda,doc=A VQL lambda to evaluate with the key as parameter. eg. x=>x+1 "`
+	Lambda   *vfilter.Lambda `vfilter:"optional,field=lambda,doc=A VQL lambda to evaluate with the key as parameter. e.g.. x=>x+1 "`
 	Name     string          `vfilter:"optional,field=name,doc=The global name of this cache (needed when more than one)"`
 	Key      types.Any       `vfilter:"optional,field=key,doc=Cache key to use."`
 	Period   int64           `vfilter:"optional,field=period,doc=The latest age of the cache."`
@@ -106,7 +106,7 @@ func (self _CacheFunc) Call(ctx context.Context, scope vfilter.Scope,
 	}
 	defer vql_subsystem.CacheSet(scope, cache_key, cache_obj)
 
-	// We dont have to return anything if there is no key, just create
+	// We don't have to return anything if there is no key, just create
 	// the cache object.
 	if arg.Key == nil {
 		return vfilter.Null{}

@@ -122,7 +122,7 @@ func GetS3Client(
 func maybeForceSecrets(
 	ctx context.Context, scope vfilter.Scope, arg *S3AcccessorArgs) error {
 
-	// Not running on the server, secrets dont work.
+	// Not running on the server, secrets don't work.
 	config_obj, ok := vql_subsystem.GetServerConfig(scope)
 	if !ok {
 		return nil

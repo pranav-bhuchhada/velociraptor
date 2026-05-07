@@ -224,7 +224,7 @@ func (self *HuntStorageManagerImpl) ModifyHuntObject(
 	case services.HuntUnmodified:
 		return services.HuntUnmodified
 
-		// Asyncronously write to datastore later but update the in
+		// Asynchronously write to datastore later but update the in
 		// memory record now.
 	case services.HuntFlushToDatastoreAsync:
 
@@ -414,7 +414,7 @@ func (self *HuntStorageManagerImpl) ListHunts(
 		hunt_obj, err := self.GetHunt(ctx, summary.HuntId)
 		if err != nil {
 			// Something is wrong! The index is referring to a hunt we
-			// dont know about - we should re-flush to sync the index.
+			// don't know about - we should re-flush to sync the index.
 			self.mu.Lock()
 			self.dirty = true
 			self.mu.Unlock()
@@ -490,7 +490,7 @@ func (self *HuntStorageManagerImpl) LoadHuntObjFromDisk(
 	// Try to get the hunt from the cache.
 	hunt_obj, err := self.GetHunt(ctx, hunt_id)
 
-	// We dont know about this hunt, let's try to read it from disk.
+	// We don't know about this hunt, let's try to read it from disk.
 	if err != nil {
 
 		// Read all the data again from the data store.
@@ -615,7 +615,7 @@ func (self *HuntStorageManagerImpl) LoadHuntsFromDatastore(
 				ctx, config_obj, launcher, hunt_id, refresh_stats,
 				force)
 			if err != nil &&
-				// These errors are expected so dont report them.
+				// These errors are expected so don't report them.
 				!errors.Is(err, utils.CancelledError) &&
 				!errors.Is(err, utils.NotFoundError) {
 				logger := logging.GetLogger(self.config_obj,

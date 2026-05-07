@@ -181,7 +181,7 @@ ORDER BY Name
 			// is not known). On the second sync that process is
 			// reused with a new process with pid 5 (and a different
 			// parent 10). The tracker should **not** associate the
-			// 2->5->10 chain sincce this is not correct.
+			// 2->5->10 chain since this is not correct.
 			Mock: `
 [
  [{"Pid":2,"Name":"Process2","Ppid":5,"CreateTime": "2021-01-01T12:30Z"}

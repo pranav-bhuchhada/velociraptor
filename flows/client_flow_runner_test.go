@@ -373,7 +373,7 @@ func (self *ServerTestSuite) TestEnrollment() {
 	wg.Wait()
 
 	// Check that Server.Internal.Enrollment is scheduled for this
-	// client. The entrollment service will respond to this
+	// client. The enrollment service will respond to this
 	// message.
 	client_id, pres := messages[0].GetString("ClientId")
 	assert.True(self.T(), pres)
@@ -614,7 +614,7 @@ func (self *ServerTestSuite) TestMonitoringWithUpload() {
 	self.RequiredFilestoreContains(path_manager.Path(), "Hello")
 }
 
-// Invalid montoring messages
+// Invalid monitoring messages
 func (self *ServerTestSuite) TestMonitoringInvalid() {
 	runner := flows.NewFlowRunner(self.Ctx, self.ConfigObj)
 	err := runner.ProcessSingleMessage(self.Ctx,
@@ -1214,7 +1214,7 @@ func (self *ServerTestSuite) TestUnknownFlow() {
 	runner := flows.NewFlowRunner(self.Ctx, self.ConfigObj)
 	defer runner.Close(self.Ctx)
 
-	// Send a message to a random non-existant flow from client.
+	// Send a message to a random non-existent flow from client.
 	assert.NoError(t, runner.ProcessSingleMessage(
 		self.Ctx,
 		&crypto_proto.VeloMessage{

@@ -316,7 +316,7 @@ func (self *ClientInfoManager) getClientTasks(
 
 					// Tack the first VQLClientAction on top of the
 					// FlowRequest for backwards compatibility. Newer clients
-					// procees FlowRequest first and ignore VQLClientAction
+					// process FlowRequest first and ignore VQLClientAction
 					// while older clients will process the VQLClientAction
 					// and ignore the FlowRequest message. In both cases the
 					// message will be valid.
@@ -389,7 +389,7 @@ func (self *ClientInfoManager) GetClientTasks(
 	ctx context.Context, client_id string) (
 	[]*crypto_proto.VeloMessage, error) {
 
-	// This list holds the flows that are inflight and we have not
+	// This list holds the flows that are in-flight and we have not
 	// heard from them for some time. We can actively request the
 	// client to report on them again to see how they are going.
 	var inflight_notifications []string
@@ -423,7 +423,7 @@ func (self *ClientInfoManager) GetClientTasks(
 			// Gather up any stats notifications we might have
 			inflight_requests = len(client_info.InFlightFlows)
 
-			// No tasks to send and we dont have anything in flight -
+			// No tasks to send and we don't have anything in flight -
 			// just exit quickly.
 			if !client_info.HasTasks && inflight_requests == 0 {
 				return nil, noTasksError
@@ -439,7 +439,7 @@ func (self *ClientInfoManager) GetClientTasks(
 					}
 				}
 
-				// Update the time to ensure we dont send these too often.
+				// Update the time to ensure we don't send these too often.
 				for _, k := range inflight_notifications {
 					client_info.InFlightFlows[k] = utils.GetTime().Now().Unix()
 				}
@@ -471,7 +471,7 @@ func (self *ClientInfoManager) GetClientTasks(
 		max_inflight_requests = 2 + int(self.config_obj.Client.Concurrency)
 	}
 
-	// If the feature is disabled we dont have a limit on the number
+	// If the feature is disabled we don't have a limit on the number
 	// of tasks we send.
 	if !inflight_checks_enabled {
 		max_inflight_requests = 100000
@@ -559,7 +559,7 @@ func (self *ClientInfoManager) GetClientTasks(
 
 	if inflight_checks_enabled && len(inflight_flows) > 0 {
 
-		// Add the inflight tags to the client record immediately.
+		// Add the in-flight tags to the client record immediately.
 		err := self.storage.Modify(ctx, self.config_obj, client_id,
 			func(client_info *services.ClientInfo) (*services.ClientInfo, error) {
 				if client_info == nil {

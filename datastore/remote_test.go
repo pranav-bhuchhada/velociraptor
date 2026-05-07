@@ -91,7 +91,7 @@ func (self *RemoteTestSuite) TestRemoteDataStore() {
 	assert.NoError(self.T(), err)
 }
 
-// Tgest retry when connecting to
+// Test retry when connecting to
 func (self *RemoteTestSuite) TestRemoteDataStoreMissing() {
 	if testing.Short() {
 		self.T().Skip("skipping test in short mode.")

@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	// Set for tests where we dont want the version to be updated. In
+	// Set for tests where we don't want the version to be updated. In
 	// real life the version is updated when the config is loaded and
 	// migrated. The Version field is simply a tag of the version of
 	// the program used to update the config last.

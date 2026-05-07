@@ -277,7 +277,7 @@ func (self *UserStorageManager) sendMutation(
 		Set("timestamp", mutation.Timestamp).
 		Set("sender", mutation.From)
 
-	// Shortcircuit mutations for the master node.
+	// Short-circuit mutations for the master node.
 	if services.IsMaster(self.config_obj) {
 		return self.handleMessageEvent(ctx, self.config_obj, event)
 	}
@@ -397,7 +397,7 @@ func (self *UserStorageManager) BuildCache(ctx context.Context) error {
 
 	db, err := datastore.GetDB(self.config_obj)
 	if err != nil {
-		// Not an error - without a datastore we dont have any users.
+		// Not an error - without a datastore we don't have any users.
 		return nil
 	}
 

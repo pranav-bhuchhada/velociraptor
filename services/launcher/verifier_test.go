@@ -155,7 +155,7 @@ sources:
   query: SELECT * FROM info()
 `, "TestImport: Artifact Test does not export anything"},
 
-		// Test supporessions
+		// Test suppressions
 		{"Suppress invalid plugin", `
 name: Test
 precondition: |

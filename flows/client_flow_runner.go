@@ -45,7 +45,7 @@ type ClientFlowRunner struct {
 	// The completer keeps track of all asynchronous filesystem
 	// operations that will occur so that when everything is written
 	// to disk, the completer can send the System.Flow.Completion
-	// event. This is important as we dont want watchers of
+	// event. This is important as we don't want watchers of
 	// System.Flow.Completion to attempt to open the collection before
 	// everything is written.
 	completer *utils.Completer
@@ -301,9 +301,9 @@ func (self *ClientFlowRunner) ProcessSingleMessage(
 		return self.ProcessMonitoringMessage(ctx, msg)
 	}
 
-	// This response can only happen when an error occured to the flow
+	// This response can only happen when an error occurred to the flow
 	// status request. This means this old client does not support the
-	// new check. We remove all inflight checks.
+	// new check. We remove all in-flight checks.
 	if flow_id == constants.STATUS_CHECK_WELL_KNOWN_FLOW {
 		return self.removeInflightChecks(ctx, client_id)
 	}
@@ -428,7 +428,7 @@ func (self *ClientFlowRunner) FileBuffer(
 				Set("Size", file_buffer.Size).
 				Set("UploadedSize", file_buffer.StoredSize))
 
-		// Write the upload to the uplod metadata
+		// Write the upload to the upload metadata
 		rs_writer, err := result_sets.NewResultSetWriter(
 			file_store_factory, flow_path_manager.UploadMetadata(),
 			json.DefaultEncOpts(),
@@ -536,7 +536,7 @@ func (self *ClientFlowRunner) handleUnknwonFlow(
 		return err
 	}
 
-	// If we dont know anything about the flow, ignore it.
+	// If we don't know anything about the flow, ignore it.
 	collection_context, err := launcher_service.Storage().LoadCollectionContext(
 		ctx, self.config_obj, client_id, flow_id)
 	if err != nil {
@@ -625,7 +625,7 @@ func (self *ClientFlowRunner) FlowStats(
 	// completion.
 	if msg.FlowComplete {
 		// Immediately remove this flow from the local InFlightFlows
-		// so we dont schedule it again.
+		// so we don't schedule it again.
 		err := client_info_manager.Modify(ctx, client_id,
 			func(client_info *services.ClientInfo) (*services.ClientInfo, error) {
 				if client_info == nil {

@@ -382,7 +382,7 @@ func ExportNotebookToZip(
 
 	wg.Add(1)
 
-	// Write the bulk of the data asyncronously.
+	// Write the bulk of the data asynchronously.
 	go func() {
 		defer wg.Done()
 

@@ -23,7 +23,7 @@ import {NewNotebook} from '../notebooks/new-notebook.jsx';
 class VeloClientSearch extends Component {
     static contextType = UserConfig;
     static propTypes = {
-        // Update the applications's search parameter.
+        // Update the applications' search parameter.
         setSearch: PropTypes.func.isRequired,
     };
 

@@ -100,7 +100,7 @@ func (self *ClientInfoTestSuite) TestClientInfoModify() {
 	assert.NoError(self.T(), err)
 	assert.Equal(self.T(), info.Ping, uint64(10))
 
-	// Now modify a nonexistant client - equivalent to a Set() call
+	// Now modify a nonexistent client - equivalent to a Set() call
 	// (atomic check and set).
 	err = client_info_manager.Modify(self.Ctx, "C.DOESNOTEXIT",
 		func(client_info *services.ClientInfo) (*services.ClientInfo, error) {

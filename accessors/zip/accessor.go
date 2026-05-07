@@ -345,7 +345,7 @@ func (self ZipFileSystemAccessor) Describe() *accessors.AccessorDescriptor {
 		Name:        "zip",
 		Description: `Open a zip file as if it was a directory.`,
 
-		// Doent need special permissions as we open the delegate
+		// Doesn't need special permissions as we open the delegate
 		Permissions: []acls.ACL_PERMISSION{},
 	}
 }

@@ -132,7 +132,7 @@ func (self *LauncherTestSuite) TestCompilingWithTools() {
 		services.CompilerOptions{}, request)
 	assert.NoError(self.T(), err)
 
-	// Now that we already know the hash, we dont care about
+	// Now that we already know the hash, we don't care about
 	// downloading the file ourselves - further compiles will work
 	// automatically.
 	status = 404
@@ -548,7 +548,7 @@ func (self *LauncherTestSuite) TestCompilingMultipleLimitedArtifacts() {
 	json.Dump(compiled)
 }
 
-// Server events need to be compiled slighly differently - each source
+// Server events need to be compiled slightly differently - each source
 // needs to run in its own goroutine.
 func (self *LauncherTestSuite) TestCompilingServerEvents() {
 	definitions := []string{`
@@ -979,7 +979,7 @@ func (self *LauncherTestSuite) TestParameterTypesDepsQuery() {
 	defer scope.Close()
 
 	// Passing types parameters to artifact plugin should pass
-	// them without interferance.
+	// them without interference.
 	queries := []string{
 		"SELECT BoolValue FROM Artifact.Test.Artifact.Types(BoolValue=0)",
 		"SELECT BoolValue FROM Artifact.Test.Artifact.Types(BoolValue=1)",
@@ -1440,7 +1440,7 @@ func (self *LauncherTestSuite) _TestDelete(t *assert.R) {
 	assert.Equal(t, len(res.Items), 1)
 	assert.Equal(t, res.Items[0].SessionId, flow_id)
 
-	// Now delete the flow asyncronously
+	// Now delete the flow asynchronously
 	_, err = launcher.Storage().DeleteFlow(
 		self.Ctx, self.ConfigObj,
 		constants.VELOCIRAPTOR_SERVER_CLIENT_ID,
@@ -1489,7 +1489,7 @@ func (self *LauncherTestSuite) _TestDelete(t *assert.R) {
 	assert.NoError(t, err)
 	assert.Equal(t, new_flow_id, flow_id)
 
-	// Now delete the flow syncronously
+	// Now delete the flow synchronously
 	_, err = launcher.Storage().DeleteFlow(
 		self.Ctx, self.ConfigObj,
 		constants.VELOCIRAPTOR_SERVER_CLIENT_ID,

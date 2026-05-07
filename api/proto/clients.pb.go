@@ -189,7 +189,7 @@ func (x *AgentInformation) GetBuildUrl() string {
 	return ""
 }
 
-// TODO: This is an older protobuf that is now largely supeceeded by
+// TODO: This is an older protobuf that is now largely superceded by
 // actions_proto.ClientInfo. We need to replace use of this protobuf
 // by ClientInfo.
 type ApiClient struct {

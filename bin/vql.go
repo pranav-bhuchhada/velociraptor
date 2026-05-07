@@ -311,7 +311,7 @@ func doVQLExport() error {
 		// - Version
 		//
 		// This means that it is possible to edit the old vql.yaml
-		// file to include more detailed description and it wil not be
+		// file to include more detailed description and it will not be
 		// over-ridden by the new plugins. But any new arg
 		// descriptions are always copied from the running code.
 		new_item := getOldItem(item.Name, "Plugin", old_data)

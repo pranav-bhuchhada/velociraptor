@@ -28,12 +28,12 @@ var (
 )
 
 // This is a custom error type that wraps an inner error but does not
-// propegate its output. It is similar to fmt.Errorf() except does not
+// propagate its output. It is similar to fmt.Errorf() except does not
 // print the underlying error string.
 
 // This is useful in order to hide the specific error message from the
 // implementation but retain its type. For example, wrapping an
-// os.ErrNotExist from the filesystem to represent a non existant flow
+// os.ErrNotExist from the filesystem to represent a non-existent flow
 // or hunt. Callers can then check for a standard error using
 // errors.Is(err, os.ErrNotExist) but the actual error message is
 // suppressed.

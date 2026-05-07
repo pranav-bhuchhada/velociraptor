@@ -22,7 +22,7 @@ var (
 		"Yaml filename to read (server.config.yaml)").Required().String()
 	tagRegEx = regexp.MustCompile("json:\"([^,]+)")
 
-	// Usually deprecated fields we dont want people to use so we dont
+	// Usually deprecated fields we don't want people to use so we don't
 	// document them.
 	hidden_fields = []string{
 		"sub_authenticators",

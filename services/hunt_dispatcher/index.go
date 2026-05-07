@@ -53,7 +53,7 @@ func (self *HuntStorageManagerImpl) _FlushIndex(ctx context.Context) (int, error
 
 	self.Debug("Flushing index with %v items", len(self.hunts))
 
-	// Debounce the flushing a bit so we dont overload the system for
+	// Debounce the flushing a bit so we don't overload the system for
 	// fast events. Note that flushes occur periodically anyway so if
 	// we skip a flush we will get it later.
 	start := utils.GetTime().Now()

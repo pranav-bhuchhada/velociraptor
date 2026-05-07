@@ -11,7 +11,7 @@ import (
 	"www.velocidex.com/golang/velociraptor/services"
 )
 
-// Listenning queue: Server.Internal.HuntUpdate
+// Listening queue: Server.Internal.HuntUpdate
 // Fields:
 //   - Hunt - the new version of the hunt. Use this to update local storage.
 //   - TriggerParticipation: If set we trigger participation to all

@@ -59,7 +59,7 @@ func (self *UserManagerTestSuite) TestDeleteUser() {
 	golden.Set("AdminO2 UserO2 is in O2", user_record)
 
 	// AdminO2 will remove the user from all orgs, but they remain in
-	// O1 because AdminO2 has no accesss to O1
+	// O1 because AdminO2 has no access to O1
 	err = users_manager.DeleteUser(
 		self.Ctx, "AdminO2", "UserO2", services.LIST_ALL_ORGS)
 	assert.NoError(self.T(), err)

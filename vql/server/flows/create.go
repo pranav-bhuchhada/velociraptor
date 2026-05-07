@@ -64,7 +64,7 @@ func (self *ScheduleCollectionFunction) Call(ctx context.Context,
 		return vfilter.Null{}
 	}
 
-	// If a full spec is provided we dont need to provide the
+	// If a full spec is provided we don't need to provide the
 	// artifacts again.
 	if arg.Spec != nil && len(arg.Artifacts) == 0 {
 		arg.Artifacts = arg.Spec.Keys()
@@ -107,7 +107,7 @@ func (self *ScheduleCollectionFunction) Call(ctx context.Context,
 			return vfilter.Null{}
 		}
 
-		// If an org is specied we use the config obj from the org.
+		// If an org is specified we use the config obj from the org.
 		config_obj, err = org_manager.GetOrgConfig(arg.OrgId)
 		if err != nil {
 			scope.Log("collect_client: %v", err)

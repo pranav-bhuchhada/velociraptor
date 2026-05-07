@@ -79,7 +79,7 @@ func RemoveFile(
 	if err != nil {
 		scope.Log("rm: Failed to remove %v: %v, reschedule", tmpfile, err)
 
-		// Add another detructor to try again a bit later.
+		// Add another destructor to try again a bit later.
 		err = scope.AddDestructor(func() {
 			RemoveFile(ctx, retry+1, tmpfile, scope)
 		})

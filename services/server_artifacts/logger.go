@@ -78,7 +78,7 @@ func (self *serverLogger) Write(b []byte) (int, error) {
 			s.LogRows++
 		})
 
-		// If an error occured mark the collection failed.
+		// If an error occurred mark the collection failed.
 		if level == "ERROR" || defaultLogErrorRegex.MatchString(msg) {
 			self.query_context.UpdateStatus(func(s *crypto_proto.VeloStatus) {
 				s.Status = crypto_proto.VeloStatus_GENERIC_ERROR

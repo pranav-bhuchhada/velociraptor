@@ -97,7 +97,7 @@ type HuntManager struct {
 	scope vfilter.Scope
 
 	// Limits how quickly we schedule hunts. Should be fast enough
-	// to be reasoable without overloading frontends
+	// to be reasonable without overloading frontends
 	limiter *rate.Limiter
 }
 
@@ -226,7 +226,7 @@ func (self *HuntManager) ProcessFlowCompletion(
 	}
 
 	// The minion hunt dispatcher does not actually care about flow
-	// status, so we dont bother broadcasting a mutation for them. We
+	// status, so we don't bother broadcasting a mutation for them. We
 	// only need to update the local hunt dispatcher on the master
 	// node which will flush to disk eventually.
 	err := self.processMutation(ctx, config_obj, mutation)
@@ -536,7 +536,7 @@ func huntMatchesOS(hunt_obj *api_proto.Hunt, client_info *services.ClientInfo) b
 // Check if we already launched it on this client. We maintain
 // a data store index of all the clients and hunts to be able
 // to quickly check if a certain hunt ran on a particular
-// client. We dont care too much how fast this is because the
+// client. We don't care too much how fast this is because the
 // hunt manager is running as an independent service and not
 // in the critical path.
 func checkHuntRanOnClient(

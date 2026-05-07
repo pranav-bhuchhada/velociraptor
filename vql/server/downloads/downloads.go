@@ -251,7 +251,7 @@ func createDownloadFile(
 	wg := sync.WaitGroup{}
 	wg.Add(1)
 
-	// Write the bulk of the data asyncronously.
+	// Write the bulk of the data asynchronously.
 	go func() {
 		defer wg.Done()
 
@@ -316,7 +316,7 @@ func downloadFlowToZip(
 		return err
 	}
 
-	// If we dont know anything this client, at least add an empty
+	// If we don't know anything this client, at least add an empty
 	// record so the flow is recognized by the importer.
 	client_info, err := client_info_manager.Get(ctx, client_id)
 	if err != nil {
@@ -433,7 +433,7 @@ func copyUploadFiles(
 			// Ensure we store index files into the correct place.
 			file_type, _ := row.GetString("Type")
 			if file_type == "idx" {
-				// If we expand the files we dont need any indexes
+				// If we expand the files we don't need any indexes
 				if expand_sparse {
 					continue
 				}
@@ -793,7 +793,7 @@ func createHuntDownloadFile(
 	wg := sync.WaitGroup{}
 	wg.Add(1)
 
-	// Write the bulk of the data asyncronously.
+	// Write the bulk of the data asynchronously.
 	go func() {
 		defer wg.Done()
 

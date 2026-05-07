@@ -32,7 +32,7 @@ type ToolOptions struct {
 	AdminOverride bool
 
 	// Tool definition is from an artifact definition. Hold onto this
-	// as one of the prestine versions so the user can reset it back
+	// as one of the pristine versions so the user can reset it back
 	// if needed.
 	ArtifactDefinition bool
 }

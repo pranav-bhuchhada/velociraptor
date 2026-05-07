@@ -229,8 +229,8 @@ func upload_rows(
 	count := int64(0)
 
 	// Batch sending to elastic: Either
-	// when we get to chuncksize or wait
-	// time whichever comes first.
+	// when we get to chunksize or wait
+	// time - whichever comes first.
 	for {
 		select {
 		case row, ok := <-row_chan:
@@ -392,7 +392,7 @@ func sanitize_index(name string) string {
 func (self _ElasticPlugin) maybeForceSecrets(
 	ctx context.Context, scope vfilter.Scope, arg *_ElasticPluginArgs) error {
 
-	// Not running on the server, secrets dont work.
+	// Not running on the server, secrets don't work.
 	config_obj, ok := vql_subsystem.GetServerConfig(scope)
 	if !ok {
 		return nil

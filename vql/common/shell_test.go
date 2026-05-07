@@ -57,7 +57,7 @@ func (self *ShellTestSuite) TestDefaultPipeReader() {
 
 	parts = nil
 
-	// Now send back buffer fulls without seperator
+	// Now send back buffer fulls without separator
 	buffer = bytes.NewReader([]byte("This is a long buffer with extra data"))
 	wg.Add(1)
 	err = defaultPipeReader(ctx, buffer, 5, "", cb, wg)

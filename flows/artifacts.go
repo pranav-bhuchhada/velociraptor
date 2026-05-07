@@ -84,7 +84,7 @@ type CollectionContext struct {
 	// The completer keeps track of all asynchronous filesystem
 	// operations that will occur so that when everything is written
 	// to disk, the completer can send the System.Flow.Completion
-	// event. This is important as we dont want watchers of
+	// event. This is important as we don't want watchers of
 	// System.Flow.Completion to attempt to open the collection before
 	// everything is written.
 	completer *utils.Completer

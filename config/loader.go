@@ -426,7 +426,7 @@ func (self *Loader) Validate(config_obj *config_proto.Config) error {
 			return err
 		}
 	} else {
-		// Logging is not required so if it fails we dont
+		// Logging is not required so if it fails we don't
 		// care.
 		_ = logging.InitLogging(config_obj)
 	}

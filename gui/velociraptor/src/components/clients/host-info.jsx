@@ -192,7 +192,7 @@ class VeloHostInfo extends Component {
     }
 
     state = {
-        // Current inflight interrogate.
+        // Current in-flight interrogate.
         interrogateOperationId: null,
 
         // The mode of the host info tab set.

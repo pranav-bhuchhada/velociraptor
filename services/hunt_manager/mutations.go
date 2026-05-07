@@ -74,7 +74,7 @@ func (self *HuntManager) processMutation(
 			}
 
 			// The following are very frequent modifications that
-			// other frontends dont care about so we write them lazily
+			// other frontends don't care about so we write them lazily
 			// to the datastore.
 			if mutation.Stats.TotalClientsScheduled > 0 {
 				hunt_obj.Stats.TotalClientsScheduled +=

@@ -80,7 +80,7 @@ func (self *ResultSetWriterImpl) SetStartRow(start_row int64) error {
 		return err
 	}
 
-	// The numebr of rows in the underlying file.
+	// The number of rows in the underlying file.
 	number_of_rows := idx_size / 8 // 8 Bytes per row in the index.
 
 	// Corrent for any rows we have in memory waiting to be flushed.
@@ -102,10 +102,10 @@ func (self *ResultSetWriterImpl) SetSync() {
 }
 
 // WriteJSONL writes an entire JSONL blob to the end of the result
-// set. This is supposed to be very fast so we dont have to parse the
+// set. This is supposed to be very fast so we don't have to parse the
 // JSON (Typically the client sends us the complete JSON blob).  Since
 // we do not not know exactly where in the JSON blob each row starts
-// we update the index to refer to the begining of the row and the
+// we update the index to refer to the beginning of the row and the
 // number of rows from there.
 
 // The reader will find the correct row by loading the JSONL file at
@@ -566,7 +566,7 @@ func (self ResultSetFactory) DeleteResultSet(
 	// 3. optionally a chunk file for compressed result sets
 	// 4. A directory hierarchy of transformed cache files.
 
-	// Try to delete these but dont worry if they are missing
+	// Try to delete these but don't worry if they are missing
 	_ = file_store_factory.Delete(path.
 		SetType(api.PATH_TYPE_FILESTORE_JSON_INDEX))
 
@@ -609,7 +609,7 @@ func (self ResultSetFactory) NewResultSetReader(
 	}
 	// Keep the open file until the reader is closed.
 
-	// -1 indicates we dont know how many rows there are
+	// -1 indicates we don't know how many rows there are
 	total_rows := int64(-1)
 	var mtime time.Time
 	idx_fd, err := file_store_factory.ReadFile(log_path.

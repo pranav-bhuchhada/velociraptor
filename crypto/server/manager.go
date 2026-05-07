@@ -49,7 +49,7 @@ func (self *ServerCryptoManager) AddCertificateRequest(
 	// client is free to generate its own private/public key pair
 	// and just uses those to communicate with the server we just
 	// store its public key so we can verify its
-	// transmissions. The most important thing here is to verfiy
+	// transmissions. The most important thing here is to verify
 	// that the client id this packet claims to come from
 	// corresponds with the public key this client presents. This
 	// avoids the possibility of impersonation since the

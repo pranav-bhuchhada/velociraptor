@@ -243,7 +243,7 @@ func (self *FlowContext) _Cancel() {
 	}
 
 	self.addLogMessage("ERROR",
-		fmt.Sprintf("Cancelled all inflight queries for flow %v", self.flow_id))
+		fmt.Sprintf("Cancelled all in-flight queries for flow %v", self.flow_id))
 
 	self._Close()
 }

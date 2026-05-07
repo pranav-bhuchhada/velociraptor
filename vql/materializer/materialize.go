@@ -151,7 +151,7 @@ func (self TempFileMatrializer) Applicable(a types.Any, b types.Any) bool {
 	return true
 }
 
-// Just deletegate to our contained rows array.
+// Just delegate to our contained rows array.
 func (self TempFileMatrializer) GetMembers(
 	scope types.Scope, a types.Any) []string {
 	return nil
@@ -190,7 +190,7 @@ func (self *TempFileMatrializer) MarshalJSON() ([]byte, error) {
 // An object implementing the ScopeMaterializer interface. This
 // materializer backs the data into memory until reading the limit and
 // then stores the data in a temp file on disk transparently.  You can
-// control the limit of the materialized threashold by setting the
+// control the limit of the materialized threshold by setting the
 // VQL_MATERIALIZE_ROW_LIMIT variable (default is 1000 rows)
 type Materializer struct{}
 

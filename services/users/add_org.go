@@ -77,7 +77,7 @@ func (self *UserManager) AddUserToOrg(
 		}
 
 		// Create a new user object. Password will need to be set
-		// seperately through SetUserPassword()
+		// separately through SetUserPassword()
 		user_record = &api_proto.VelociraptorUser{
 			Name: username,
 		}
@@ -99,7 +99,7 @@ func (self *UserManager) AddUserToOrg(
 	return self.SetUser(ctx, user_record)
 }
 
-// We dont expect too many orgs so O(1) is ok.
+// We don't expect too many orgs so O(1) is ok.
 func inUserOrgs(org_id string, user_record *api_proto.VelociraptorUser) bool {
 	for _, org := range user_record.Orgs {
 		if org_id == org.Id {

@@ -4,7 +4,7 @@
   state about previous matches so that additional checks can be made
   across rules.
 
-  Full defails here https://sigmahq.io/docs/meta/correlations.html
+  Full details here https://sigmahq.io/docs/meta/correlations.html
 
   ## Velociraptor's implementation:
 
@@ -328,7 +328,7 @@ func (self *SigmaCorrelatorGroup) Match(
 		}, nil
 
 	} else {
-		// Supporess the hit
+		// Suppress the hit
 		return &Result{
 			Match:           false,
 			CorrelationHits: nil,

@@ -44,7 +44,7 @@ type OrgManager struct {
 
 	// We keep track of each org's services using its own wg and
 	// control overall lifetime using our parent's wg. This allows us
-	// to cancel each org's sevices independently.
+	// to cancel each org's services independently.
 	parent_wg *sync.WaitGroup
 
 	// The base global config object
@@ -321,7 +321,7 @@ func (self *OrgManager) Start(
 	}
 
 	// If a datastore is not configured we are running on the client
-	// or as a tool so we dont need to scan for new orgs.
+	// or as a tool so we don't need to scan for new orgs.
 	if config_obj.Datastore == nil {
 		return nil
 	}

@@ -205,7 +205,7 @@ func (self *TestSuite) TestRetransmission() {
 
 }
 
-// Invalid montoring messages
+// Invalid monitoring messages
 func (self *TestSuite) TestMonitoringInvalid() {
 	runner := NewLegacyFlowRunner(self.ConfigObj)
 	err := runner.ProcessSingleMessage(self.Ctx,
@@ -369,7 +369,7 @@ func (self *TestSuite) TestResourceLimits() {
 	runner.Close(self.Ctx)
 
 	// We still collect these rows but the flow is still in the
-	// error state. We do this so we dont lose the last few
+	// error state. We do this so we don't lose the last few
 	// messages which are still in flight.
 	collection_context, err = LoadCollectionContext(self.Ctx, self.ConfigObj,
 		self.client_id, flow_id)
@@ -487,7 +487,7 @@ func (self *TestSuite) TestClientUploaderStoreFile() {
 }
 
 // Schedule the flow and drain its messages to emulate it being
-// inflight.
+// in-flight.
 func (self *TestSuite) scheduleFlow() {
 	closer := utils.SetFlowIdForTests(self.flow_id)
 	defer closer()

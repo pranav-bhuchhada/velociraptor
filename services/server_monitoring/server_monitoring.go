@@ -214,7 +214,7 @@ func (self *EventTable) equal(events []*actions_proto.VQLCollectorArgs) bool {
 	return true
 }
 
-// Start the queries in the requewst
+// Start the queries in the request
 func (self *EventTable) StartQueries(config_obj *config_proto.Config) error {
 
 	request := self.Get()

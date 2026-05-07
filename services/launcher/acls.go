@@ -22,7 +22,7 @@ func CheckAccess(
 	perm, err := acl_manager.CheckAccess(acls.COLLECT_BASIC)
 	if err == nil && perm {
 		// COLLECT_BASIC permission is sufficient to override
-		// artifact's required permission. The usecase is that low
+		// artifact's required permission. The use case is that low
 		// privilege users are given only COLLECT_BASIC and then only
 		// certain artifacts are marked as BASIC. If we required the
 		// users to also contain higher permissions it would defeat
@@ -42,7 +42,7 @@ func CheckAccess(
 	}
 
 	// If the user has COLLECT_CLIENT or COLLECT_SERVER they can
-	// collect anything but if they dont we allow the user to have the
+	// collect anything but if they don't we allow the user to have the
 	// lesser COLLECT_BASIC permission which requires a check on the
 	// artifact metadata.
 	perm, err = acl_manager.CheckAccess(permissions)

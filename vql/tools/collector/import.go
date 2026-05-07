@@ -418,7 +418,7 @@ func (self ImportCollectionFunction) ensureClientId(
 		return nil
 	}
 
-	// If we get here we dont know the client so we just create a
+	// If we get here we don't know the client so we just create a
 	// new one with this client id
 
 	// Client is not known, create it.
@@ -461,7 +461,7 @@ func (self ImportCollectionFunction) getClientIdFromHostnameOrCollection(
 			hostname = collection_hostname
 		}
 
-		// We dont know this client id - Search for a client id we do
+		// We don't know this client id - Search for a client id we do
 		// know, that has the same hostname. This happens in importing
 		// the offline collection which does not contain a client id.
 		if client_id == "" && hostname != "" {

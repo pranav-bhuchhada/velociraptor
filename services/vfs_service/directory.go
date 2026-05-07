@@ -305,7 +305,7 @@ func (self *VFSService) ListDirectoryFiles(
 			continue
 		}
 
-		// Insert a Download info column in the begining.
+		// Insert a Download info column in the beginning.
 		row_data = append([]interface{}{""}, row_data...)
 
 		download_info, pres := lookup[name]

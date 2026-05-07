@@ -213,7 +213,7 @@ type NotebookCellRequest struct {
 	Env               []*Env   `protobuf:"bytes,9,rep,name=env,proto3" json:"env,omitempty"`
 	IncludeUploads    bool     `protobuf:"varint,10,opt,name=include_uploads,json=includeUploads,proto3" json:"include_uploads,omitempty"`
 	IncludeTimelines  bool     `protobuf:"varint,16,opt,name=include_timelines,json=includeTimelines,proto3" json:"include_timelines,omitempty"`
-	// If this is set schedule the calculation syncronously.
+	// If this is set schedule the calculation synchronously.
 	Sync bool `protobuf:"varint,15,opt,name=sync,proto3" json:"sync,omitempty"`
 }
 

@@ -149,7 +149,7 @@ func (self *PSTFile) Close() {
 	self.refs--
 }
 
-// Used to open a fixed attachement for reading.
+// Used to open a fixed attachment for reading.
 func (self *PSTFile) GetAttachment(att_id pst.Identifier) (
 	res *pst.Attachment, closer func(), err error) {
 
@@ -203,7 +203,7 @@ func (self *PSTCache) Open(
 		return res, nil
 	}
 
-	// Open it the old fasioned way.
+	// Open it the old fashioned way.
 	accessor, err := accessors.GetAccessor(accessor_name, scope)
 	if err != nil {
 		return nil, err

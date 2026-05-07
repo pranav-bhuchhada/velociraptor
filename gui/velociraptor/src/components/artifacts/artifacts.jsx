@@ -142,7 +142,7 @@ class ArtifactInspector extends React.Component {
 
         // If we get here the url contains the artifact name, we
         // therefore have to allow all types of artifacts because we
-        // dont know which type the artifact is
+        // don't know which type the artifact is
         this.setState({selectedDescriptor: {name: artifact_name},
                        preset_filter: "",
                        current_filter: artifact_name});

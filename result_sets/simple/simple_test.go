@@ -387,7 +387,7 @@ func (self *ResultSetTestSuite) TestResultSetWriterWriteJSONL() {
 	// WriteJSONL is supposed to optimize the write load by
 	// writing large JSON chunks into the result set. We
 	// deliberately do not want to parse it out so we just append
-	// the data to the file. However we dont know any of the row
+	// the data to the file. However we don't know any of the row
 	// indexes in the JSON blob, but we do know how many rows it
 	// is in total.
 	path_manager := paths.NewFlowPathManager(self.client_id, self.flow_id).Log()

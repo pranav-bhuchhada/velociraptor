@@ -437,7 +437,7 @@ func (x *FlowDetails) GetAvailableDownloads() *AvailableDownloads {
 // This shows the requests that were actually sent to the client. When
 // the user selects artifacts to send they are compiled into raw VQL
 // for sending to the client. NOTE: Clients do not know anything about
-// artifacts - they only interprect raw VQL as compiled by the server.
+// artifacts - they only interpret raw VQL as compiled by the server.
 type ApiFlowRequestDetails struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

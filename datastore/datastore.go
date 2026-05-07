@@ -80,7 +80,7 @@ type DataStore interface {
 		message proto.Message) error
 
 	// Writes the data asynchronously and fires the completion
-	// callback when the data hits the disk and will become visibile
+	// callback when the data hits the disk and will become visible
 	// to other nodes this may be a long time in the future.
 	SetSubjectWithCompletion(
 		config_obj *config_proto.Config,

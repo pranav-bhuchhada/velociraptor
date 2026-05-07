@@ -318,7 +318,7 @@ func GetArtifactMode(
 	ctx context.Context, config_obj *config_proto.Config,
 	opts services.JournalOptions) (mode artifact_modes.ArtifactMode, err error) {
 
-	// Shortcut for hard coded options - we dont need to look up the
+	// Shortcut for hard coded options - we don't need to look up the
 	// artifact in the repository.
 	if artifact_modes.IsModeValid(opts.ArtifactType) {
 		return opts.ArtifactType, nil

@@ -209,8 +209,8 @@ func _upload_rows(
 	wait_time := time.Duration(arg.WaitTime) * time.Second
 	next_send_time := time.After(wait_time)
 
-	// Batch sending to splunk: Either when we get to chuncksize or
-	// wait time whichever comes first.
+	// Batch sending to splunk: Either when we get to chunksize or
+	// wait time - whichever comes first.
 	for {
 		select {
 		case row, ok := <-row_chan:
@@ -361,7 +361,7 @@ func send_to_splunk(
 func (self _SplunkPlugin) maybeForceSecrets(
 	ctx context.Context, scope vfilter.Scope, arg *_SplunkPluginArgs) error {
 
-	// Not running on the server, secrets dont work.
+	// Not running on the server, secrets don't work.
 	config_obj, ok := vql_subsystem.GetServerConfig(scope)
 	if !ok {
 		return nil

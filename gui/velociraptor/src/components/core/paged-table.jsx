@@ -603,7 +603,7 @@ class VeloPagedTable extends Component {
         start_row: 0,
 
         // If the table has an index this will be the total number of
-        // rows in the table. If it is -1 then we dont know the total
+        // rows in the table. If it is -1 then we don't know the total
         // number.
         total_size: 0,
         loading: true,
@@ -790,7 +790,7 @@ class VeloPagedTable extends Component {
                 });
 
                 // If all the columns are hidden, then just show them
-                // all beause we need to show something.
+                // all because we need to show something.
                 if (hidden === columns.length) {
                     toggles = {};
                 }

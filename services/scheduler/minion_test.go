@@ -151,7 +151,7 @@ func (self *MinionSchedulerTestSuite) TestNotebookMinionScheduler() {
 		assert.Contains(self.T(), json.MustMarshalString(cell), "Cancelled")
 	}()
 
-	// Issue the cancellaion. Cancellation should be dispatched across
+	// Issue the cancellation. Cancellation should be dispatched across
 	// to the minion through the notification service.
 	time.Sleep(200 * time.Millisecond)
 

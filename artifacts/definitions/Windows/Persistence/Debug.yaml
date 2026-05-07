@@ -12,7 +12,7 @@ description: |
   therefore does not need to be processed.
 
   Limitations: This queries the live registry and therefore does not
-  parse data in Windows.old or Regback folders, or VSS.
+  parse data in `Windows.old` or `Regback` folders, or VSS.
 
 reference:
   - https://attack.mitre.org/techniques/T1183/

@@ -121,7 +121,7 @@ func (self *SecretsService) getSecret(
 		secret_path_manager.Secret(type_name, secret_name),
 		secret_proto)
 
-	// If we dont have the secret ourselves, but we have a delegate
+	// If we don't have the secret ourselves, but we have a delegate
 	// manager, we can call them to try and resolve the secret.
 	if self.parent != nil && utils.IsNotFound(err) {
 		return self.parent.getSecret(ctx, type_name, secret_name)
@@ -361,7 +361,7 @@ func (self *SecretsService) GetSecret(ctx context.Context,
 	return nil, fmt.Errorf("Permission Denied accessing secret %v", secret_name)
 }
 
-// Returns a reducted version of the secret.
+// Returns a redacted version of the secret.
 func (self *SecretsService) GetSecretMetadata(ctx context.Context,
 	type_name, secret_name string) (*services.Secret, error) {
 

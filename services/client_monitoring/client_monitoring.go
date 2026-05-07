@@ -6,7 +6,7 @@
 
 // NOTE: The client's event table will be updated when the client's
 // table's version if one the following is changed:
-// 1. The global event table state was modified (eg. the user updated the GUI).
+// 1. The global event table state was modified (e.g.. the user updated the GUI).
 
 // 2. Any label was updated for that client which may have caused the
 // client to be added into the label group.
@@ -339,7 +339,7 @@ func (self *ClientEventTable) GetClientUpdateEventTableMessage(
 	}
 
 	// Add a bit of randomness to the max wait to spread out
-	// client's updates so they do not syncronize load on the
+	// client's updates so they do not synchronize load on the
 	// server.
 	for _, event := range result.Event {
 		// Ensure responses do not come back too quickly
@@ -414,7 +414,7 @@ func (self *ClientEventTable) ProcessArtifactModificationEvent(
 		// anything but this is hard to know - not only do we need to
 		// look at the artifact in the event table but all
 		// dependencies as well. So for now we just recompile the
-		// event table when any artifact is changed. We dont expect
+		// event table when any artifact is changed. We don't expect
 		// this to be too frequent.
 		return true
 	}

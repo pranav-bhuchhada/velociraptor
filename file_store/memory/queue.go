@@ -193,7 +193,7 @@ func (self *MemoryQueueManager) Broadcast(
 func (self *MemoryQueueManager) PushEventJsonl(
 	path_manager api.PathManager, source string, jsonl []byte, row_count int) error {
 
-	// Writes are asyncronous
+	// Writes are asynchronous
 	rs_writer, err := result_sets.NewTimedResultSetWriter(
 		self.config_obj, path_manager, json.DefaultEncOpts(),
 		utils.BackgroundWriter)
@@ -213,7 +213,7 @@ func (self *MemoryQueueManager) PushEventJsonl(
 func (self *MemoryQueueManager) PushEventRows(
 	path_manager api.PathManager, source string, dict_rows []*ordereddict.Dict) error {
 
-	// Writes are asyncronous
+	// Writes are asynchronous
 	rs_writer, err := result_sets.NewTimedResultSetWriter(
 		self.config_obj, path_manager, json.DefaultEncOpts(),
 		utils.BackgroundWriter)

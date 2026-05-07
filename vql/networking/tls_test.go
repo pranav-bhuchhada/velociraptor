@@ -61,7 +61,7 @@ func TestTLSVerification(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	// Default client config is PKI verification - we dont like this
+	// Default client config is PKI verification - we don't like this
 	// certificate.
 	config_obj := &config_proto.ClientConfig{}
 	_, _, err := testHTTPConnection(config_obj, ts.URL)

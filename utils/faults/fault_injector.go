@@ -23,7 +23,7 @@ func (self *FaultInjectorService) SetBlockHTTPDo(d time.Duration) {
 	self.blockHTTPDo = d
 }
 
-// Block a HTTPDo function to emulate TCP time wait blocakge.
+// Block a HTTPDo function to emulate TCP time wait blockage.
 func (self *FaultInjectorService) BlockHTTPDo(ctx context.Context) {
 	if self.blockHTTPDo == 0 {
 		return

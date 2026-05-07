@@ -40,7 +40,7 @@ func (self *AuditManager) LogAudit(
 	}
 
 	// If an event is important enough to be audit logged we need to
-	// make sure to write it syncronously.
+	// make sure to write it synchronously.
 	return journal.PushRowsToArtifact(
 		ctx, config_obj, []*ordereddict.Dict{record},
 		services.JournalOptions{

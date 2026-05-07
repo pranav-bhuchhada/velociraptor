@@ -270,7 +270,7 @@ type RawRegFileSystemAccessor struct {
 	cache *RawRegFileSystemAccessorCache
 }
 
-// Registery filesystems are usually case insensitive.
+// Registry filesystems are usually case insensitive.
 func (self RawRegFileSystemAccessor) GetCanonicalFilename(
 	path *accessors.OSPath) string {
 	return strings.ToLower(path.String())

@@ -40,7 +40,7 @@ type JournalOptions struct {
 
 	// Event filters are applied on the event before forwarding it to
 	// WatchQueueWithCB. This prevents the callback from receiving
-	// invalid or untruste events.
+	// invalid or untrusted events.
 	EventFilter func(
 		config_obj *config_proto.Config,
 		opts JournalOptions,

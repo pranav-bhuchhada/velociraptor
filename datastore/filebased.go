@@ -21,7 +21,7 @@
 // used for storing local metadata and uses no locking:
 
 // Object IO is considered atomic - there are no locks. This can
-// result in races for contentended objects but the Velociraptor
+// result in races for contended objects but the Velociraptor
 // design avoids file contention at all times.
 
 // Files can be written as protobuf encoding (this is the old
@@ -310,7 +310,7 @@ func writeContentToFile(
 
 	filename := AsDatastoreFilename(db, config_obj, urn)
 
-	// Truncate the file immediately so we dont need to make a seocnd
+	// Truncate the file immediately so we don't need to make a second
 	// syscall. Empirically on Linux, a truncate call always works,
 	// even if there is no available disk space to accommodate the
 	// required file size. This means we can not avoid file corruption

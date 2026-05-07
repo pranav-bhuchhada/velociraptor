@@ -24,7 +24,7 @@ import (
 // methods to arrive at the same OS Path.
 
 // For example, on Windows components are separated by the backslash
-// characted and the first component can be a device name (which may
+// character and the first component can be a device name (which may
 // contain path separators):
 
 // \\.\C:\Windows\System32 -> ["\\.\C:", "Windows", "System32"]

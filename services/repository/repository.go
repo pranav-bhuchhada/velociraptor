@@ -55,7 +55,7 @@ type Repository struct {
 }
 
 // A Parent repository is another repository we can delegate to if we
-// dont have the artifact definition we require.
+// don't have the artifact definition we require.
 func (self *Repository) SetParent(
 	parent services.Repository, parent_config_obj *config_proto.Config) {
 	self.mu.Lock()
@@ -225,7 +225,7 @@ func (self *Repository) LoadProto(
 			}
 		}
 
-		// Ensure precodition has correct syntax - it should be a VQL
+		// Ensure precondition has correct syntax - it should be a VQL
 		// query.
 		if artifact.Precondition != "" {
 			_, err := vfilter.MultiParse(artifact.Precondition)
@@ -617,7 +617,7 @@ var (
 func validateArtifactName(name string) error {
 	if !artifactNameRegex.MatchString(name) {
 		return errors.New(
-			"Invalid artifact name. Can only contain characted in this set 'a-zA-Z0-9_.'")
+			"Invalid artifact name. Can only contain characters in this set 'a-zA-Z0-9_.'")
 	}
 
 	for _, part := range strings.Split(name, ".") {

@@ -213,7 +213,7 @@ func (self *FileStoreTestSuite) TestListChildrenWithTypes() {
 	}
 }
 
-// Storing files in untypes locations recovers them as untyped.
+// Storing files in untyped locations recovers them as untyped.
 func (self *FileStoreTestSuite) TestListChildrenUntypedPaths() {
 
 	for idx, t := range []api.PathType{
@@ -298,7 +298,7 @@ func (self *FileStoreTestSuite) TestListDirectory() {
 		"/a/b/Bar/Baz.json",
 		"/a/b/Foo.txt.json"}, names)
 
-	// Walk non existent directory just returns no results.
+	// Walk non-existent directory just returns no results.
 	names = nil
 	err = api.Walk(self.filestore, filename.AddChild("nonexistant"),
 		func(path api.FSPathSpec, info os.FileInfo) error {
@@ -383,7 +383,7 @@ func (self *FileStoreTestSuite) TestCompressedFileReadWrite() {
 	_, err = fd.WriteCompressed(buffer, 0, len(test_str))
 	assert.NoError(self.T(), err)
 
-	// Check that size is incremeented.
+	// Check that size is incremented.
 	size, err := fd.Size()
 	assert.NoError(self.T(), err)
 	assert.Equal(self.T(), int64(len(test_str)), size)
@@ -483,7 +483,7 @@ func (self *FileStoreTestSuite) TestCompressedFileReadWrite() {
 	assert.NoError(self.T(), err)
 	assert.Equal(self.T(), n, 4)
 
-	// Reopenning the file should give the right size.
+	// Reopening the file should give the right size.
 	fd, err = self.filestore.WriteFile(filename)
 	assert.NoError(self.T(), err)
 	size, err = fd.Size()
@@ -514,7 +514,7 @@ func (self *FileStoreTestSuite) TestLargeCompressedFileReadWrite() {
 	_, err = fd.WriteCompressed(test_str, 0, 10)
 	assert.NoError(self.T(), err)
 
-	// Check that size is incremeented by the size we claimed.
+	// Check that size is incremented by the size we claimed.
 	size, err := fd.Size()
 	assert.NoError(self.T(), err)
 	assert.Equal(self.T(), int64(10), size)
@@ -542,7 +542,7 @@ func (self *FileStoreTestSuite) TestFileReadWrite() {
 	_, err = fd.Write([]byte("Some data"))
 	assert.NoError(self.T(), err)
 
-	// Check that size is incremeented.
+	// Check that size is incremented.
 	size, err := fd.Size()
 	assert.NoError(self.T(), err)
 	assert.Equal(self.T(), int64(9), size)
@@ -630,7 +630,7 @@ func (self *FileStoreTestSuite) TestFileReadWrite() {
 	assert.NoError(self.T(), err)
 	assert.Equal(self.T(), n, 4)
 
-	// Reopenning the file should give the right size.
+	// Reopening the file should give the right size.
 	fd, err = self.filestore.WriteFile(filename)
 	assert.NoError(self.T(), err)
 	size, err = fd.Size()

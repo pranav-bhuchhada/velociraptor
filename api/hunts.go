@@ -218,7 +218,7 @@ func (self *ApiServer) CreateHunt(
 			"User is not allowed to launch hunts.")
 	}
 
-	// Require the Org Admin permission to launch hunts in a differen
+	// Require the Org Admin permission to launch hunts in a different
 	// org.
 	orgs := in.OrgIds
 	if len(orgs) > 0 {
@@ -566,7 +566,7 @@ func (self *ApiServer) EstimateHunt(
 	now := uint64(time.Now().UnixNano() / 1000)
 
 	is_client_recent := func(client_id string, seen map[string]bool) {
-		// We dont care about last active status
+		// We don't care about last active status
 		if in.LastActive == 0 {
 			seen[client_id] = true
 			return

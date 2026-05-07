@@ -51,7 +51,7 @@ const (
 	MAX_MEMORY    = 50 * 1024 * 1024
 	MAX_POST_SIZE = 5 * 1024 * 1024
 
-	// Messages to the client which we dont care about their responses.
+	// Messages to the client which we don't care about their responses.
 	IgnoreResponseState = uint64(101)
 
 	USER_AGENT = "Velociraptor"
@@ -136,7 +136,7 @@ const (
 	// Used by the overlay accessor to configure delegates'
 	OVERLAY_ACCESSOR_DELEGATES = "OVERLAY_ACCESSOR_DELEGATES"
 
-	// VQL tries to balance memory/cpu tradeoffs and also place limits
+	// VQL tries to balance memory/cpu trade-offs and also place limits
 	// on memory use. These parameters control this behavior. You can
 	// set them in the VQL environment to influence how the engine
 	// optimizes the queries.

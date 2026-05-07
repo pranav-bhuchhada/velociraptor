@@ -428,7 +428,7 @@ func send_to_adx(
 func (self _ADXPlugin) maybeForceSecrets(
 	ctx context.Context, scope vfilter.Scope, arg *_ADXPluginArgs) error {
 
-	// Not running on the server, secrets dont work.
+	// Not running on the server, secrets don't work.
 	config_obj, ok := vql_subsystem.GetServerConfig(scope)
 	if !ok {
 		return nil

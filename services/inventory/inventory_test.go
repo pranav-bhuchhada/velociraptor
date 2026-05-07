@@ -680,7 +680,7 @@ sources:
 	assert.Equal(self.T(), tool.Version, "0.6.5")
 	assert.Equal(self.T(), tool.Filename, "SampleTool0.6.5.exe")
 
-	// But we can still explicitely get the old version if we wanted to
+	// But we can still explicitly get the old version if we wanted to
 	tool, err = inventory_service.GetToolInfo(
 		self.Ctx, self.ConfigObj, "SampleToolSemver", "0.6.5-rc2")
 	assert.NoError(self.T(), err)

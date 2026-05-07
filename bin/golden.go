@@ -203,7 +203,7 @@ func runTest(fixture *testFixture, sm *services.Service,
 
 	ctx := sm.Ctx
 
-	// Limit each test for maxmimum time
+	// Limit each test for maximum time
 	if !*disable_alarm {
 		sub_ctx, cancel := makeCtxWithTimeout(ctx, 30)
 		defer cancel()

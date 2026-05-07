@@ -90,7 +90,7 @@ func (self QueryPlugin) Call(
 				return
 			}
 
-			// The subscoope will switch to the specified org.
+			// The subscope will switch to the specified org.
 			builder.Config = org_config_obj
 			builder.ACLManager = acl_managers.NewServerACLManager(
 				org_config_obj, vql_subsystem.GetPrincipal(scope))

@@ -262,7 +262,7 @@ func (self *Store) SaveSnapshot(
 		return nil
 	}
 
-	// Take a copy of the snapshot to ensure we dont block under lock.
+	// Take a copy of the snapshot to ensure we don't block under lock.
 
 	// Write to memory buffer first then flush to disk in one
 	// operation to reduce IO overheads.
@@ -281,7 +281,7 @@ func (self *Store) SaveSnapshot(
 	// Total number of records we flush to disk.
 	record_count := uint64(len(self.data))
 
-	// Release the lock here as we dont need it for the rest.
+	// Release the lock here as we don't need it for the rest.
 	self.mu.Unlock()
 
 	completion := func() {
@@ -303,7 +303,7 @@ func (self *Store) SaveSnapshot(
 	// The final write must be synchronous because we need to
 	// guarantee it hits the disk
 	if sync {
-		// For sync writes we dont care about publising snapshot
+		// For sync writes we don't care about publishing snapshot
 		// events. These occur during shutdown so it does not matter.
 		completion = utils.SyncCompleter
 	}

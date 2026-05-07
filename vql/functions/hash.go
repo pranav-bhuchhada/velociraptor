@@ -70,7 +70,7 @@ type HashFunctionArgs struct {
 }
 
 // HashFunction calculates a hash of a file. It may be expensive
-// so we make it cancelllable.
+// so we make it cancellable.
 type HashFunction struct{}
 
 func (self *HashFunction) Call(ctx context.Context,

@@ -404,7 +404,7 @@ func StartDatastore(
 	implementation, err := GetImplementationName(config_obj)
 	if err != nil {
 		// Invalid datastore configuration is not an issue here - it
-		// just means we dont want to use the remote datastore.
+		// just means we don't want to use the remote datastore.
 		return nil
 	}
 

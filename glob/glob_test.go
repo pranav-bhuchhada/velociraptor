@@ -45,7 +45,7 @@ var pathComponentsTestFixture = []pathComponentsTestFixtureType{
 	{"foo", []_PathFilterer{
 		_LiteralComponent{"foo"},
 	}},
-	// A ** has to start at the begining of the component, otherwise
+	// A ** has to start at the beginning of the component, otherwise
 	// it is not considered a recursive component and just interpreted
 	// as a normal wild card.
 	{"foo**", []_PathFilterer{

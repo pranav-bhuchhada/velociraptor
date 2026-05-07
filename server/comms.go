@@ -705,7 +705,7 @@ func send_client_messages(
 					return
 
 					// Write a pad message every 10 seconds
-					// to keep the conenction alive.
+					// to keep the connection alive.
 				case <-time.After(10 * time.Second):
 					_, err := w.Write(serialized_pad)
 					if err != nil {

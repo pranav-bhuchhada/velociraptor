@@ -317,7 +317,7 @@ func (self IndexSearchPlugin) Call(
 
 			for _, hit := range result.Hits {
 
-				// Preverse the order of the fields since Bleve
+				// Reverse the order of the fields since Bleve
 				// returns an unordered map.
 				row := ordereddict.NewDict()
 				for _, f := range searchRequest.Fields {

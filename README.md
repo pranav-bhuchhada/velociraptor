@@ -90,7 +90,7 @@ tools. On Ubuntu this is simply:
 ```bash
 $ sudo apt-get install mingw-w64-x86-64-dev gcc-mingw-w64-x86-64 gcc-mingw-w64
 ```
-On OpenSUSE there are two options, install debianutils then use the for mentioned `apt-get install` or use OpenSUSE packages
+On OpenSUSE there are two options, install `debianutils` then use the aforementioned `apt-get install` or use OpenSUSE packages
 ```bash
 $ sudo zypper install debhelper debianutils
 ```

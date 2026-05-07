@@ -46,7 +46,7 @@ func (self *RepositoryManager) StartWatchingForUpdates(
 	ctx context.Context, wg *sync.WaitGroup,
 	config_obj *config_proto.Config) error {
 
-	// Are we running on the client? we dont need to sync local
+	// Are we running on the client? we don't need to sync local
 	// repository managers.
 	if config_obj.Services != nil &&
 		config_obj.Services.ClientEventTable {
@@ -375,7 +375,7 @@ func _newRepositoryManager(
 		metadata: NewMetadataManager(ctx, config_obj),
 	}
 
-	// Start the metada house keeping loop.
+	// Start the metadata housekeeping loop.
 	wg.Add(1)
 	go global_repository.metadata.HouseKeeping(
 		ctx, config_obj, wg, global_repository)

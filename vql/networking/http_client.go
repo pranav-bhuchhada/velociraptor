@@ -631,7 +631,7 @@ func parseURL(real_url string) (*url.URL, error) {
 		return nil, errInvalidUrl
 	}
 
-	// Unix domain URLs look like, eg:
+	// Unix domain URLs look like, e.g.:
 	//   /var/run/docker.sock:unix/info
 	// These are converted into a url.URL
 	//   Scheme: unix

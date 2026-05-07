@@ -58,7 +58,7 @@ func (self *GzipFileInfo) IsDir() bool {
 }
 
 func (self *GzipFileInfo) Size() int64 {
-	// We dont really know the size.
+	// We don't really know the size.
 	return -1
 }
 

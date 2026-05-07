@@ -280,7 +280,7 @@ func doArtifactCollect() error {
 		return err
 	}
 
-	// If interrupt has occured we cancel everything and wait for any
+	// If interrupt has occurred we cancel everything and wait for any
 	// cleanups to occur. If we return too quickly from the main
 	// thread, we might leave some tempfiles behind.
 	defer func() {

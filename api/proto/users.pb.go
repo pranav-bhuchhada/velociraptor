@@ -778,7 +778,7 @@ func (x *ApiUser) GetMessages() int64 {
 	return 0
 }
 
-// Contol the GUI per user.
+// Control the GUI per user.
 type GUICustomizations struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1015,7 +1015,7 @@ type SetGUIOptionsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// If this is specifed the GUI will redirect to the specified
+	// If this is specified the GUI will redirect to the specified
 	// URL. This helps when there are multiple servers that can handle
 	// the user and a better one is needed. Normally this is really
 	// set by any middleware (e.g. custom authenticators).

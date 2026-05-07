@@ -414,7 +414,7 @@ func (self *matchPlan) hideEmptySources() bool {
 
 // All conditions must match
 func (self *matchPlan) matchArtifact(artifact *artifacts_proto.Artifact) bool {
-	if !self.hidden && // Dont show hidden artifacts
+	if !self.hidden && // Don't show hidden artifacts
 
 		// Artifact is set to hidden
 		artifact.Metadata != nil && artifact.Metadata.Hidden {

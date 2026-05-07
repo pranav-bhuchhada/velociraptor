@@ -62,7 +62,7 @@ func (self *Store) SetMetadata(
 		return err
 	}
 
-	// Merge the new keys with the existing metdata
+	// Merge the new keys with the existing metadata
 	updated_keys := []string{}
 	for _, item := range metadata.Items() {
 		if utils.IsNil(item.Value) {

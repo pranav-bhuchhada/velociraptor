@@ -66,7 +66,7 @@ func (self *ShellPlugin) maybeForceSecrets(
 	ctx context.Context, scope vfilter.Scope,
 	arg *ShellPluginArgs) error {
 
-	// Not running on the server, secrets dont work.
+	// Not running on the server, secrets don't work.
 	config_obj, ok := vql_subsystem.GetServerConfig(scope)
 	if !ok {
 		return nil
@@ -208,7 +208,7 @@ func (self ShellPlugin) Call(
 		// response because we will continue modifying it.
 		wg := &sync.WaitGroup{}
 
-		// Read asyncronously.
+		// Read asynchronously.
 		var mu sync.Mutex
 		response := &ShellResult{}
 		length := int(arg.Length)
@@ -402,7 +402,7 @@ type pipeReaderFunc func(
 	pipe io.Reader, buff_length int, sep string,
 	cb func(message string), wg *sync.WaitGroup) error
 
-// Split the buffer into seperator lines and push them to the
+// Split the buffer into separator lines and push them to the
 // callback. Leaved the last part (without the sep) in the buffer for
 // next time returning the buffer position where the next read should
 // go.

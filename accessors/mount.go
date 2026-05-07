@@ -22,7 +22,7 @@ import (
 	"www.velocidex.com/golang/vfilter"
 )
 
-// Mount tree is very sparse so we dont really need a map here -
+// Mount tree is very sparse so we don't really need a map here -
 // linear search is fast enough.
 
 // The mount accessor is essentially a redirector - it needs to find a
@@ -355,7 +355,7 @@ func (self *MountFileSystemAccessor) AddMapping(
 	target *OSPath,
 	source_accessor FileSystemAccessor) {
 
-	// Walk the tree and create the sentinal node. NOTE: split the
+	// Walk the tree and create the sentinel node. NOTE: split the
 	// path according to the target accessor we are emulating.
 	node := self.root
 

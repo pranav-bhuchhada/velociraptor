@@ -147,7 +147,7 @@ class _VeloShellCell extends Component {
         }
 
         // Button to load the output from the server (it could be
-        // large so we dont fetch it until the user asks)
+        // large so we don't fetch it until the user asks)
         if (this.state.loaded) {
             buttons.push(
                 <ToolTip tooltip={T("Hide Output")} key={3}>
@@ -393,7 +393,7 @@ class _VeloVQLCell extends Component {
         }
 
         // Button to load the output from the server (it could be
-        // large so we dont fetch it until the user asks)
+        // large so we don't fetch it until the user asks)
         if (this.state.loaded) {
             buttons.push(
                 <ToolTip tooltip={T("Hide Output")} key={3} >

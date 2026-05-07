@@ -93,7 +93,7 @@ var (
 	}
 
 	// Notify when a new client is fully interrogated and ready to
-	// work on. The typicaly flow for a new client:
+	// work on. The typically flow for a new client:
 	// 1. Enroll - we have keys but do not know things like hostname etc.
 	// 2. Interrogate - We collect basic info and send an event on
 	//    INTERROGATION_QUEUE

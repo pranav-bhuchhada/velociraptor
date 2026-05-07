@@ -389,7 +389,7 @@ func NewPoolClientExecutor(
 }
 
 // Detect if this is a FlowStats message which represents the flow is
-// compelte.
+// complete.
 func isFlowComplete(message *crypto_proto.VeloMessage) bool {
 	if message.FlowStats == nil {
 		return false

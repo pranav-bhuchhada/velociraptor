@@ -146,7 +146,7 @@ func (x *Version) GetArchitecture() string {
 	return ""
 }
 
-// A pointer to cuurently executing flows.
+// A pointer to currently executing flows.
 type FlowCheckPoint struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -707,7 +707,7 @@ type ClientConfig struct {
 	LowResourceMaxCpu uint64 `protobuf:"varint,52,opt,name=low_resource_max_cpu,json=lowResourceMaxCpu,proto3" json:"low_resource_max_cpu,omitempty"`
 	// We determine we are running on a low resource machine if the
 	// system has less than 2 cores. This allows to increase the
-	// threadhold. Set to a large number to disable.
+	// threshold. Set to a large number to disable.
 	LowResourceCpuCount uint64 `protobuf:"varint,53,opt,name=low_resource_cpu_count,json=lowResourceCpuCount,proto3" json:"low_resource_cpu_count,omitempty"`
 }
 
@@ -1828,7 +1828,7 @@ type GUIConfig struct {
 	// header will be used in the allowed_cidr matching if specified.
 	// NOTE: Only use this if you do have a reverse proxy in front of
 	// the server. Otherwise an attacker can simply send this header
-	// to pretent to come from any IP address. If this setting is
+	// to pretend to come from any IP address. If this setting is
 	// specified we take the src address from the header, otherwise
 	// from the remote IP address.
 	ForwardedProxyHeader string `protobuf:"bytes,24,opt,name=forwarded_proxy_header,json=forwardedProxyHeader,proto3" json:"forwarded_proxy_header,omitempty"`
@@ -2384,7 +2384,7 @@ type FrontendResourceControl struct {
 	// The maximum time in seconds the client will batch log messages
 	// before forwarding them to the server (default 1 second).
 	DefaultLogBatchTime uint64 `protobuf:"varint,31,opt,name=default_log_batch_time,json=defaultLogBatchTime,proto3" json:"default_log_batch_time,omitempty"`
-	// The maximum time in seconds the client will batch minitoring
+	// The maximum time in seconds the client will batch monitoring
 	// log messages before forwarding them to the server (default 600
 	// second).
 	DefaultMonitoringLogBatchTime uint64 `protobuf:"varint,32,opt,name=default_monitoring_log_batch_time,json=defaultMonitoringLogBatchTime,proto3" json:"default_monitoring_log_batch_time,omitempty"`
@@ -2580,7 +2580,7 @@ type FrontendConfig struct {
 	// Serve the GUI from this base path instead of "/"
 	BasePath string `protobuf:"bytes,25,opt,name=base_path,json=basePath,proto3" json:"base_path,omitempty"`
 	// This allows the frontends to listen on plain HTTP - It is
-	// useful if you have SSL offloading (e.g. ngix). This is not
+	// useful if you have SSL offloading (e.g. nginx). This is not
 	// configured by the wizard - you will need to manually configure
 	// it. You better know what you are doing here!
 	UsePlainHttp bool `protobuf:"varint,24,opt,name=use_plain_http,json=usePlainHttp,proto3" json:"use_plain_http,omitempty"`
@@ -2591,15 +2591,15 @@ type FrontendConfig struct {
 	RequireClientCertificates bool `protobuf:"varint,36,opt,name=require_client_certificates,json=requireClientCertificates,proto3" json:"require_client_certificates,omitempty"`
 	// A proxy setting to use - Velociraptor needs to connect to
 	// download tools. This setting will force it to go out over this
-	// proxy. NOTE- If you dont want your server to allow outbound
-	// connections, just set this to an non existant setting.
+	// proxy. NOTE- If you don't want your server to allow outbound
+	// connections, just set this to an non-existent setting.
 	Proxy string `protobuf:"bytes,33,opt,name=proxy,proto3" json:"proxy,omitempty"`
 	// For more complex proxy configurations use this setting
 	// (overrides the `proxy` configuration above).
 	ProxyConfig *ProxyConfig `protobuf:"bytes,37,opt,name=proxy_config,json=proxyConfig,proto3" json:"proxy_config,omitempty"`
 	// These are used to secure the client/server communications -
 	// Even when using external TLS certificates! This certificate
-	// must be signed by the Velociraptor rooot CA in all cases. If
+	// must be signed by the Velociraptor root CA in all cases. If
 	// using an external TLS configuration this layer of encryption
 	// happens **in addition** to the external TLS certificates.
 	Certificate string `protobuf:"bytes,3,opt,name=certificate,proto3" json:"certificate,omitempty"`
@@ -2627,7 +2627,7 @@ type FrontendConfig struct {
 	// Below options are DEPRECATED - moved to resources by migration code.
 	Concurrency   uint64 `protobuf:"varint,9,opt,name=concurrency,proto3" json:"concurrency,omitempty"`
 	MaxUploadSize uint64 `protobuf:"varint,11,opt,name=max_upload_size,json=maxUploadSize,proto3" json:"max_upload_size,omitempty"`
-	// Various performoance related tweaks.
+	// Various performance related tweaks.
 	ExpectedClients int64 `protobuf:"varint,15,opt,name=expected_clients,json=expectedClients,proto3" json:"expected_clients,omitempty"`
 	// Per client rate in bytes/sec
 	PerClientUploadRate int64 `protobuf:"varint,21,opt,name=per_client_upload_rate,json=perClientUploadRate,proto3" json:"per_client_upload_rate,omitempty"`
@@ -3945,7 +3945,7 @@ type Defaults struct {
 	MaxLogs          uint64 `protobuf:"varint,56,opt,name=max_logs,json=maxLogs,proto3" json:"max_logs,omitempty"`
 	MaxRowBufferSize uint64 `protobuf:"varint,31,opt,name=max_row_buffer_size,json=maxRowBufferSize,proto3" json:"max_row_buffer_size,omitempty"`
 	MaxBatchWait     uint64 `protobuf:"varint,35,opt,name=max_batch_wait,json=maxBatchWait,proto3" json:"max_batch_wait,omitempty"`
-	// Controls how exports work (creating hunt or colletion exports
+	// Controls how exports work (creating hunt or collection exports
 	// to a zip file).
 	ExportConcurrency   int64 `protobuf:"varint,40,opt,name=export_concurrency,json=exportConcurrency,proto3" json:"export_concurrency,omitempty"`
 	ExportMaxTimeoutSec int64 `protobuf:"varint,41,opt,name=export_max_timeout_sec,json=exportMaxTimeoutSec,proto3" json:"export_max_timeout_sec,omitempty"`
@@ -3975,7 +3975,7 @@ type Defaults struct {
 	// clients with the key department and value contains accounting
 	// in their client metadata.
 	IndexedClientMetadata []string `protobuf:"bytes,51,rep,name=indexed_client_metadata,json=indexedClientMetadata,proto3" json:"indexed_client_metadata,omitempty"`
-	// If this is set we do not actively check the status of inflight
+	// If this is set we do not actively check the status of in-flight
 	// collections. This is a new feature and may need to be disabled
 	// in some large deployments.
 	DisableActiveInflightChecks bool  `protobuf:"varint,52,opt,name=disable_active_inflight_checks,json=disableActiveInflightChecks,proto3" json:"disable_active_inflight_checks,omitempty"`
@@ -4713,7 +4713,7 @@ type Security struct {
 	// A list of path prefixes allowed for the 'file' accessor. If
 	// this is empty the file accessor will work on all
 	// directories. If you want to disable access to the server's
-	// filesystem you can set this to a non existent directory,
+	// filesystem you can set this to a non-existent directory,
 	// e.g. /nonexistent/ .
 	AllowedFileAccessorPrefix []string `protobuf:"bytes,1,rep,name=allowed_file_accessor_prefix,json=allowedFileAccessorPrefix,proto3" json:"allowed_file_accessor_prefix,omitempty"`
 	// Deny takes precedent over allow.

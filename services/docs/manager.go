@@ -24,7 +24,7 @@ type DocManager struct {
 	index_filename_age time.Time
 }
 
-// Debounce the filename a bit so we dont check too often.
+// Debounce the filename a bit so we don't check too often.
 func (self *DocManager) indexFilename() string {
 	now := utils.GetTime().Now()
 

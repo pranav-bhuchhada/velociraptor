@@ -128,7 +128,7 @@ func BytesEqual(a []byte, b []byte) bool {
 	return true
 }
 
-// Force coersion to int64
+// Force coercion to int64
 func ToInt64(x interface{}) (int64, bool) {
 	switch t := x.(type) {
 	case bool:

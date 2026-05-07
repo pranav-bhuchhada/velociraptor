@@ -505,8 +505,8 @@ export default class UserLabel extends React.Component {
 
                      this.context.updateTraits();
                  }).catch(response=>{
-                     // If we tried to set the org but we dont have
-                     // permission in it, we switch rightr back to the
+                     // If we tried to set the org but we don't have
+                     // permission in it, we switch right back to the
                      // previous org.
                      if (response.response &&
                          response.response.status === 403 &&

@@ -29,7 +29,7 @@ import (
 // https://stackoverflow.com/questions/21060945/simple-way-to-copy-a-file-in-golang
 
 // CopyFile copies a file from src to dst. If src and dst files exist,
-// and are the same, then return success. Otherise, copy the file
+// and are the same, then return success. Otherwise, copy the file
 // contents from src to dst.
 func CopyFile(ctx context.Context,
 	src, dst string, mode os.FileMode) (err error) {

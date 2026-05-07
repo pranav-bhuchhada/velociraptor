@@ -376,7 +376,7 @@ func mergeSources(
 }
 
 // Parse the query and determine if it requires any artifacts. If any
-// artifacts are found, then recursivly determine their dependencies
+// artifacts are found, then recursively determine their dependencies
 // etc.
 func GetQueryDependencies(
 	ctx context.Context, config_obj *config_proto.Config,
@@ -517,14 +517,14 @@ func PopulateArtifactsVQLCollectorArgs(
 			}
 
 			// Sub artifacts run in an isolated scope so
-			// the main artifact's env is not visibile to
+			// the main artifact's env is not visible to
 			// them. In the case of tools, we want the
 			// tool parameters to be visible to all sub
 			// artifacts as well. We therefore copy these
 			// into the artifact definitions as
 			// parameters. Note that dependent artifacts
 			// never declare their own tools themselves
-			// since we dont want them to fetch the tool
+			// since we don't want them to fetch the tool
 			// independently.
 			tmp := &actions_proto.VQLCollectorArgs{}
 			for _, tool := range artifact.Tools {

@@ -528,7 +528,7 @@ type Artifact struct {
 	// permission (because there is no ACL enforcement on the client).
 	//
 	// Therefore we say this artifact implies the user has EXECVE -
-	// this is safe if the aritfact takes steps to ensure the user
+	// this is safe if the artifact takes steps to ensure the user
 	// does not have arbitrary control over what to execute (for
 	// example, if the artifact launches a tool with restricted
 	// command line args).

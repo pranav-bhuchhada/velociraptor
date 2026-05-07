@@ -39,7 +39,7 @@ func (self HuntBackupProvider) BackupResults(
 func (self *HuntStorageManagerImpl) BackupResults(
 	ctx context.Context, wg *sync.WaitGroup) (<-chan vfilter.Row, error) {
 
-	// We dont lock the data so we can take as long as needed.
+	// We don't lock the data so we can take as long as needed.
 	self.mu.Lock()
 	var hunt_ids []string
 	for hunt_id := range self.hunts {

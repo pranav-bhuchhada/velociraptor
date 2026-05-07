@@ -250,7 +250,7 @@ func (self *ClientInfoManager) Start(
 		return err
 	}
 
-	// Watch for flow completions and unset the inflight status.
+	// Watch for flow completions and unset the in-flight status.
 	err = journal.WatchQueueWithCB(ctx, config_obj, wg,
 		artifacts.FLOW_COMPLETION,
 		"ClientInfoManager",
@@ -319,7 +319,7 @@ func (self *ClientInfoManager) ProcessInFlightNotifications(
 	}
 
 	remove, pres := row.GetBool("ClearFlows")
-	// Just clear all the flows - we dont need to track
+	// Just clear all the flows - we don't need to track
 	// them. This only happens when communicating with older
 	// clients that do not support it.
 	if remove || pres {
@@ -329,7 +329,7 @@ func (self *ClientInfoManager) ProcessInFlightNotifications(
 					return nil, utils.NotFoundError
 				}
 
-				// Just clear all the flows - we dont need to track
+				// Just clear all the flows - we don't need to track
 				// them. This only happens when communicating with older
 				// clients that do not support it.
 				client_info.InFlightFlows = nil

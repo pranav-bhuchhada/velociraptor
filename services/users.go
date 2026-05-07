@@ -47,7 +47,7 @@ The user manager is global to all orgs and therefore it is
 initialized once for the root org.
 
 This is the one stop shop for managing everything about users except
-ACLs (which are managed within in org seperately)
+ACLs (which are managed within in org separately)
 */
 type UserManager interface {
 	SetUser(ctx context.Context,
@@ -74,7 +74,7 @@ type UserManager interface {
 
 	// Used to get the user's record including password hashes. This
 	// only makes sense when using the `Basic` authenticator because
-	// otherwise we dont maintain passwords.
+	// otherwise we don't maintain passwords.
 	GetUserWithHashes(ctx context.Context, principal, username string) (
 		*api_proto.VelociraptorUser, error)
 

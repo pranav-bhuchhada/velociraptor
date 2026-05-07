@@ -97,7 +97,7 @@ func NewServer(ctx context.Context,
 		return nil, err
 	}
 
-	// This number mainly affects memory use during large tranfers
+	// This number mainly affects memory use during large transfers
 	// as it controls the number of concurrent clients that may be
 	// transferring data (each will use some memory to
 	// buffer). This should not be too large relative to the

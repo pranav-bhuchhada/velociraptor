@@ -1,7 +1,7 @@
 // A Queue manager that uses files on disk.
 
 // The queue manager is a broker between writers and readers. Writers
-// want to emit a message to a queue with minimumal delay, and have
+// want to emit a message to a queue with minimal delay, and have
 // the message dispatched to all readers with minimal latency.
 
 // A memory queue simply pushes the message to all reader's via a
@@ -225,7 +225,7 @@ func (self *DirectoryQueueManager) Broadcast(
 func (self *DirectoryQueueManager) PushEventRows(
 	path_manager api.PathManager, source string, dict_rows []*ordereddict.Dict) error {
 
-	// Writes are asyncronous.
+	// Writes are asynchronous.
 	rs_writer, err := result_sets.NewTimedResultSetWriter(
 		self.config_obj, path_manager, json.DefaultEncOpts(),
 		utils.BackgroundWriter)
@@ -247,7 +247,7 @@ func (self *DirectoryQueueManager) PushEventJsonl(
 	path_manager api.PathManager, source string,
 	jsonl []byte, row_count int) error {
 
-	// Writes are asyncronous.
+	// Writes are asynchronous.
 	rs_writer, err := result_sets.NewTimedResultSetWriter(
 		self.config_obj, path_manager, json.DefaultEncOpts(),
 		utils.BackgroundWriter)

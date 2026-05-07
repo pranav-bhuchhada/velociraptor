@@ -7,7 +7,7 @@ import (
 
 var (
 	/* Although it may seem that we can support arbitrary secret
-	   definitions, this is not the case. Secrects can only be used by
+	   definitions, this is not the case. Secrets can only be used by
 	   VQL plugins and functions that expects them and are never
 	   exposed to VQL queries. Therefore defining custom secrets is
 	   useless.

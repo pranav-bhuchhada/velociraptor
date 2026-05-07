@@ -161,7 +161,7 @@ var (
 		StaticURLReplayer{
 			// Usually we require the email_verified claim to be able
 			// to use the email but some IDPs do not set it. We reject
-			// such uers.
+			// such users.
 			name:      "Email is not verified",
 			err_regex: "Email .+ is not verified",
 			responses: map[string]string{
@@ -191,7 +191,7 @@ var (
 		StaticURLReplayer{
 			// Usually we require the email_verified claim to be able
 			// to use the email but some IDPs do not set it. We reject
-			// such uers.
+			// such users.
 			name: "Email is not verified but it is allowed",
 			authenticator: &config_proto.Authenticator{
 				Type:              "oidc",
@@ -525,7 +525,7 @@ func (self *OauthTestSuire) TestProvider() {
 
 		claims_getter, ok := oidc_auther.claims_getter.(*OidcClaimsGetter)
 		if ok {
-			// Set by this test so we dont have to have a real ID
+			// Set by this test so we don't have to have a real ID
 			// token. In reality the claims_getter will verify the ID
 			// token with the IDP.
 			claims_getter.ignore_id_token = true

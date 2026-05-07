@@ -63,7 +63,7 @@ type HuntRecord struct {
 	serialized []byte
 }
 
-// The hunt dispatcher is a singlton which keeps hunt information in
+// The hunt dispatcher is a singleton which keeps hunt information in
 // memory under lock. We can modify hunt statistics, query for
 // applicable hunts etc. Hunts are flushed to disk periodically and
 // read from disk when new hunts are created.
@@ -424,7 +424,7 @@ func (self *HuntDispatcher) StartRefresh(
 	go func() {
 		defer wg.Done()
 
-		// This could take a long time for startup but we dont have a
+		// This could take a long time for startup but we don't have a
 		// choice.
 		if err != nil || n == 0 {
 			stats, err := self.Store.LoadHuntsFromDatastore(ctx, config_obj, FORCE_REFRESH)

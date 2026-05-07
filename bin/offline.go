@@ -250,7 +250,7 @@ func doCollector() error {
 	}
 
 	// this is needed to ensure artifacts are fully loaded before we
-	// start so their tools are fully registred.
+	// start so their tools are fully registered.
 	query := `
 LET _ <= SELECT name FROM artifact_definitions()
 LET _ <= import(artifact="Server.Utils.CreateCollector")

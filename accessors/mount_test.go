@@ -64,7 +64,7 @@ func TestMountFilesystemAccessor(t *testing.T) {
 		})
 
 	// Create a mount filesystem to organize the different
-	// filesystems. Use Linux path convensions.
+	// filesystems. Use Linux path conventions.
 	mount_fs := NewMountFileSystemAccessor(
 		MustNewLinuxOSPath(""), root_fs_accessor)
 

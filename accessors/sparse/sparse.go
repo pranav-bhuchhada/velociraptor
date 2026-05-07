@@ -70,7 +70,7 @@ func (self *SparseReader) readDistinctPages(buf []byte) (int, error) {
 
 		_, err = self.handle.Read(buf[buf_start:buf_end])
 		if err != nil {
-			// Error occured reading a single page, zero
+			// Error occurred reading a single page, zero
 			// it out and skip the page.
 			for i := buf_start; i < buf_end; i++ {
 				buf[i] = 0
@@ -107,11 +107,11 @@ func (self *SparseReader) Read(buf []byte) (int, error) {
 
 			_, err = self.handle.Read(buf[:to_read])
 
-			// A read error occured - split the read into multiple page
+			// A read error occurred - split the read into multiple page
 			// size reads to get as much data as we can out of the
 			// region. Note: We always return as much data as was
 			// required, we simply null pad the missing data. Therefore if
-			// a reader askes to read from a memory region that contains
+			// a reader asks to read from a memory region that contains
 			// no data, we never return an error - just zero pad those
 			// regions.
 			if err != nil {

@@ -103,7 +103,7 @@ func streamEvents(
 					replicationReceiveHistorgram.WithLabelValues("").Observe(v)
 				}))
 
-			// If we are not able to send within the sepecified 5
+			// If we are not able to send within the specified 5
 			// seconds we must abort the connection.
 
 			err = utils.DoWithTimeout(func() error {
@@ -166,7 +166,7 @@ func (self *ApiServer) WatchEvent(
 	self.wg.Add(1)
 	defer self.wg.Done()
 
-	// The call can access the datastore from any org becuase it is a
+	// The call can access the datastore from any org because it is a
 	// server->server call.
 	org_manager, err := services.GetOrgManager()
 	if err != nil {

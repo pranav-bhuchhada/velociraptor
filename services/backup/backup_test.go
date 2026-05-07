@@ -128,7 +128,7 @@ func (self *BackupTestSuite) TestBackups() {
 
 	// test_utils.GetMemoryFileStore(self.T(), self.ConfigObj).Debug()
 
-	// Backup file should be dependend on the mocked time.
+	// Backup file should be dependent on the mocked time.
 	result := self.readBackupFile(export_path)
 	prefix := "orgs/root/"
 	test_provider, _ := result.Get(prefix + "TestProvider.json")
