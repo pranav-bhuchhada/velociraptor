@@ -42,6 +42,7 @@ import (
 	config_proto "www.velocidex.com/golang/velociraptor/config/proto"
 	crypto_utils "www.velocidex.com/golang/velociraptor/crypto/utils"
 	"www.velocidex.com/golang/velociraptor/executor"
+	"www.velocidex.com/golang/velociraptor/executor/selfprotect"
 	"www.velocidex.com/golang/velociraptor/http_comms"
 	logging "www.velocidex.com/golang/velociraptor/logging"
 	"www.velocidex.com/golang/velociraptor/services/writeback"
@@ -106,6 +107,14 @@ func doInstall(config_obj *config_proto.Config) (err error) {
 		return errors.Wrap(err, 0)
 	}
 	if pres {
+		// Relax self-protection before modifying the service
+		if config_obj.Client.EnableSelfProtection {
+			logger.Info("Removing self-protection for service upgrade")
+			selfprotect.RemoveServiceProtection(service_name)
+			selfprotect.RemoveFileProtection(
+				selfprotect.GetProtectedPaths(config_obj))
+		}
+
 		// We have to stop the service first, or we can not overwrite the file.
 		err = controlService(service_name, svc.Stop, svc.Stopped)
 		if err != nil {
@@ -336,6 +345,14 @@ func doRemove() error {
 
 	logger := logging.GetLogger(config_obj, &logging.ClientComponent)
 	service_name := config_obj.Client.WindowsInstaller.ServiceName
+
+	// Relax self-protection before removal
+	if config_obj.Client != nil && config_obj.Client.EnableSelfProtection {
+		logger.Info("Removing self-protection for service removal")
+		selfprotect.RemoveServiceProtection(service_name)
+		selfprotect.RemoveFileProtection(
+			selfprotect.GetProtectedPaths(config_obj))
+	}
 
 	// Ensure the service is stopped first.
 	err = controlService(service_name, svc.Stop, svc.Stopped)

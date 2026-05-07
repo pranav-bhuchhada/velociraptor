@@ -5,6 +5,7 @@ import (
 
 	config_proto "www.velocidex.com/golang/velociraptor/config/proto"
 	"www.velocidex.com/golang/velociraptor/executor"
+	"www.velocidex.com/golang/velociraptor/executor/selfprotect"
 	"www.velocidex.com/golang/velociraptor/executor/throttler"
 	"www.velocidex.com/golang/velociraptor/logging"
 	"www.velocidex.com/golang/velociraptor/services"
@@ -62,6 +63,12 @@ func StartClientServices(
 
 	// Start the nanny first so we are covered from here on.
 	err = sm.Start(executor.StartNannyService)
+	if err != nil {
+		return sm, err
+	}
+
+	// Start self-protection (tamper protection) service
+	err = sm.Start(selfprotect.StartSelfProtectionService)
 	if err != nil {
 		return sm, err
 	}

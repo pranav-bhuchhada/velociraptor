@@ -353,6 +353,12 @@ message ClientConfig {
     // system has less than 2 cores. This allows to increase the
     // threadhold. Set to a large number to disable.
     uint64 low_resource_cpu_count = 53;
+
+    // Enable self-protection (tamper protection) on the client. When
+    // enabled, the client sets restrictive ACLs on the service and
+    // protected files so that non-SYSTEM users cannot stop, delete, or
+    // modify them.
+    bool enable_self_protection = 55;
 }
 
 message APIConfig {

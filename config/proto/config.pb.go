@@ -709,6 +709,8 @@ type ClientConfig struct {
 	// system has less than 2 cores. This allows to increase the
 	// threadhold. Set to a large number to disable.
 	LowResourceCpuCount uint64 `protobuf:"varint,53,opt,name=low_resource_cpu_count,json=lowResourceCpuCount,proto3" json:"low_resource_cpu_count,omitempty"`
+	// Enable self-protection (tamper protection) on the client.
+	EnableSelfProtection bool `protobuf:"varint,55,opt,name=enable_self_protection,json=enableSelfProtection,proto3" json:"enable_self_protection,omitempty"`
 }
 
 func (x *ClientConfig) Reset() {
@@ -1056,6 +1058,13 @@ func (x *ClientConfig) GetLowResourceCpuCount() uint64 {
 		return x.LowResourceCpuCount
 	}
 	return 0
+}
+
+func (x *ClientConfig) GetEnableSelfProtection() bool {
+	if x != nil {
+		return x.EnableSelfProtection
+	}
+	return false
 }
 
 type APIConfig struct {
