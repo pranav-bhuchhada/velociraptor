@@ -68,16 +68,14 @@ type ResultSetWriterImpl struct {
 	sync bool
 }
 
-// This tells us that we expect to write the next row at this offset.
-// We need to ensure the file is actually as we expect it to be.
-func (self *ResultSetWriterImpl) SetStartRow(start_row int64) error {
+func (self *ResultSetWriterImpl) TotalRows() int64 {
 	self.mu.Lock()
 	defer self.mu.Unlock()
 
 	// Calculate the number of rows currently in the file.
 	idx_size, err := self.index_fd.Size()
 	if err != nil {
-		return err
+		return 0
 	}
 
 	// The number of rows in the underlying file.
@@ -86,8 +84,19 @@ func (self *ResultSetWriterImpl) SetStartRow(start_row int64) error {
 	// Corrent for any rows we have in memory waiting to be flushed.
 	number_of_rows += int64(len(self.rows))
 
+	return number_of_rows
+}
+
+func (self *ResultSetWriterImpl) TotalBytes() int64 {
+	size, _ := self.fd.Size()
+	return size
+}
+
+// This tells us that we expect to write the next row at this offset.
+// We need to ensure the file is actually as we expect it to be.
+func (self *ResultSetWriterImpl) SetStartRow(start_row int64) error {
 	// This is a retransmission
-	if number_of_rows > start_row {
+	if self.TotalRows() > start_row {
 		return retransmissionError
 	}
 
@@ -104,7 +113,7 @@ func (self *ResultSetWriterImpl) SetSync() {
 // WriteJSONL writes an entire JSONL blob to the end of the result
 // set. This is supposed to be very fast so we don't have to parse the
 // JSON (Typically the client sends us the complete JSON blob).  Since
-// we do not not know exactly where in the JSON blob each row starts
+// we do not know exactly where in the JSON blob each row starts
 // we update the index to refer to the beginning of the row and the
 // number of rows from there.
 
